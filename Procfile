@@ -1,0 +1,1 @@
+web: java 'com.fyhao.springwebapps.SpringWebMain'
