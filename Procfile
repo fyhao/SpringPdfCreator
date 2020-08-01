@@ -1,1 +1,1 @@
-web: java 'com.fyhao.springwebapps.SpringWebMain'
+web: gradle bootRun
