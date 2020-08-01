@@ -34,5 +34,11 @@ public class TestingWebApplicationTests {
 	public void greetingShouldReturnDefaultMessage() throws Exception {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/test",
 				String.class)).contains("Hello, World");
+    }
+    
+    @Test
+	public void pdfHomeShouldReturnPDFGenerationFormTitle() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/pdf",
+				String.class)).contains("PDF Generation Form");
 	}
 }

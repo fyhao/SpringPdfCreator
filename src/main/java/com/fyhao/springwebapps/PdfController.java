@@ -34,6 +34,7 @@ public class PdfController {
     @RequestMapping(value="/generatepdf", method = RequestMethod.POST)
 	public void generatepdf(@RequestBody String html, HttpServletResponse response) throws Exception {
         html = html.replace(HTMLFormConstants + "=", "");
-       HtmlConverter.convertToPdf(html, response.getOutputStream());
+        html = html.trim();
+        HtmlConverter.convertToPdf(html, response.getOutputStream());
 	}
 }
