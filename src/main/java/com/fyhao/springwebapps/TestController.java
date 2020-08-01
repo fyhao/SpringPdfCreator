@@ -2,6 +2,13 @@ package com.fyhao.springwebapps;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.itextpdf.html2pdf.HtmlConverter;
+
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,5 +28,12 @@ public class TestController {
 	public @ResponseBody String greeting() {
         logger.info("Greeting");
 		return "Hello, World";
+    }
+    
+    @RequestMapping("/testpdf")
+	public void testpdf(HttpServletResponse response) throws Exception {
+        String html = "<html><body>test " + new java.util.Date().toString() + "</body></html>";
+        
+       HtmlConverter.convertToPdf(html, response.getOutputStream());
 	}
 }
