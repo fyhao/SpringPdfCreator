@@ -1,1 +1,1 @@
-web: java -jar build/libs/SpringPdfCreator-0.1.0.jar
+web: java -jar build/libs/SpringPdfCreator-0.1.0.jar --server.port=$PORT
