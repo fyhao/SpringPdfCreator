@@ -1,5 +1,7 @@
 package com.fyhao.springwebapps;
 
+import java.net.URLDecoder;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -35,6 +37,7 @@ public class PdfController {
 	public void generatepdf(@RequestBody String html, HttpServletResponse response) throws Exception {
         html = html.replace(HTMLFormConstants + "=", "");
         html = html.trim();
+        html = URLDecoder.decode(html, "UTF-8");
         HtmlConverter.convertToPdf(html, response.getOutputStream());
 	}
 }
