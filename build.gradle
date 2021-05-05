@@ -58,7 +58,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-activemq:2.3.2.RELEASE")
     compile 'com.itextpdf:itext7-core:7.1.12'
     compile 'com.itextpdf:kernel:7.1.12'
-    compile 'com.itextpdf:io:7.1.12'
+    compile 'com.itextpdf:io:7.1.15'
     compile 'com.itextpdf:layout:7.1.12'
     compile 'com.itextpdf:forms:7.1.12'
     compile 'com.itextpdf:pdfa:7.1.12'
