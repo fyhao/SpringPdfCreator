@@ -57,13 +57,13 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test:2.4.5")
     compile("org.springframework.boot:spring-boot-starter-activemq:2.4.5")
     compile 'com.itextpdf:itext7-core:7.1.15'
-    compile 'com.itextpdf:kernel:7.1.12'
+    compile 'com.itextpdf:kernel:7.1.15'
     compile 'com.itextpdf:io:7.1.15'
     compile 'com.itextpdf:layout:7.1.15'
     compile 'com.itextpdf:forms:7.1.15'
     compile 'com.itextpdf:pdfa:7.1.15'
     compile 'com.itextpdf:sign:7.1.15'
-    compile 'com.itextpdf:barcodes:7.1.12'
+    compile 'com.itextpdf:barcodes:7.1.15'
     compile 'com.itextpdf:font-asian:7.1.15'
     compile 'com.itextpdf:hyph:7.1.15'
     compile group: 'com.itextpdf', name: 'html2pdf', version: '3.0.4'
