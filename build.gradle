@@ -63,7 +63,7 @@ dependencies {
     compile 'com.itextpdf:forms:7.1.15'
     compile 'com.itextpdf:pdfa:7.1.15'
     compile 'com.itextpdf:sign:7.1.16'
-    compile 'com.itextpdf:barcodes:7.1.15'
+    compile 'com.itextpdf:barcodes:7.1.16'
     compile 'com.itextpdf:font-asian:7.1.15'
     compile 'com.itextpdf:hyph:7.1.15'
     compile group: 'com.itextpdf', name: 'html2pdf', version: '3.0.4'
