@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceGray;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.DocumentProperties;
@@ -21,6 +23,7 @@ import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 
 public class WFContext {
@@ -84,6 +87,12 @@ public class WFContext {
 		        // adding template to document
 		        Image imagew = new Image(template);
 		        document.add(imagew);
+			}
+			else if(step.action.equals("barcode")) {
+				BarcodeQRCode qrCode = new BarcodeQRCode(step.text);
+			    PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDocument);
+			    Image barcodeImage = new Image(barcodeObject).setWidth(100f).setHeight(100f);
+			    document.add(new Paragraph().add(barcodeImage));
 			}
 		}
 	}

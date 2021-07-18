@@ -140,6 +140,11 @@ public class TestController {
         step.url = "https://i.stack.imgur.com/ILTQq.png";
         request.steps.add(step);
         
+        step = new WFStep();
+        step.action = "barcode";
+        step.text = "the test barcode";
+        request.steps.add(step);
+        
         return request;
 	}
     
