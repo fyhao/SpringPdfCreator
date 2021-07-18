@@ -34,39 +34,39 @@ sourceCompatibility = 11
 targetCompatibility = 11
 
 dependencies {
-    compile group: 'com.lmax', name: 'disruptor', version:'3.4.4'
-	  compile("org.springframework.boot:spring-boot-starter-web:2.5.2")
-	  compile 'org.springframework.boot:spring-boot-starter-log4j2:2.5.2'
-    compile("org.springframework.boot:spring-boot-starter-data-jpa:2.5.2")
-    compile("org.springframework.boot:spring-boot-starter-data-rest:2.5.2")
-    compile("com.h2database:h2:1.4.200")
-    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
-    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.3.1.jre8-preview'
-    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
-    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.1'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1'
-    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
-    compile group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '10.0.8'
-    compile("org.springframework.boot:spring-boot-starter-websocket:2.5.2")
-    compile("org.webjars:webjars-locator-core")
-    compile("org.webjars:sockjs-client:1.5.1")
-    compile("org.webjars:stomp-websocket:2.3.4")
-    compile("org.webjars:bootstrap:5.0.1")
-    compile("org.webjars:jquery:3.6.0")
-    testCompile("org.springframework.boot:spring-boot-starter-test:2.5.2")
-    compile("org.springframework.boot:spring-boot-starter-activemq:2.5.2")
-    compile 'com.itextpdf:itext7-core:7.1.16'
-    compile 'com.itextpdf:kernel:7.1.16'
-    compile 'com.itextpdf:io:7.1.16'
-    compile 'com.itextpdf:layout:7.1.16'
-    compile 'com.itextpdf:forms:7.1.16'
-    compile 'com.itextpdf:pdfa:7.1.16'
-    compile 'com.itextpdf:sign:7.1.16'
-    compile 'com.itextpdf:barcodes:7.1.16'
-    compile 'com.itextpdf:font-asian:7.1.16'
-    compile 'com.itextpdf:hyph:7.1.16'
-    compile group: 'com.itextpdf', name: 'html2pdf', version: '3.0.5'
+    implementation group: 'com.lmax', name: 'disruptor', version:'3.4.4'
+	  implementation("org.springframework.boot:spring-boot-starter-web:2.5.2")
+	  implementation 'org.springframework.boot:spring-boot-starter-log4j2:2.5.2'
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.5.2")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest:2.5.2")
+    implementation("com.h2database:h2:1.4.200")
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
+    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.3.1.jre8-preview'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.1'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1'
+    implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
+    implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '10.0.8'
+    implementation("org.springframework.boot:spring-boot-starter-websocket:2.5.2")
+    implementation("org.webjars:webjars-locator-core")
+    implementation("org.webjars:sockjs-client:1.5.1")
+    implementation("org.webjars:stomp-websocket:2.3.4")
+    implementation("org.webjars:bootstrap:5.0.1")
+    implementation("org.webjars:jquery:3.6.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.2")
+    implementation("org.springframework.boot:spring-boot-starter-activemq:2.5.2")
+    implementation 'com.itextpdf:itext7-core:7.1.16'
+    implementation 'com.itextpdf:kernel:7.1.16'
+    implementation 'com.itextpdf:io:7.1.16'
+    implementation 'com.itextpdf:layout:7.1.16'
+    implementation 'com.itextpdf:forms:7.1.16'
+    implementation 'com.itextpdf:pdfa:7.1.16'
+    implementation 'com.itextpdf:sign:7.1.16'
+    implementation 'com.itextpdf:barcodes:7.1.16'
+    implementation 'com.itextpdf:font-asian:7.1.16'
+    implementation 'com.itextpdf:hyph:7.1.16'
+    implementation group: 'com.itextpdf', name: 'html2pdf', version: '3.0.5'
 }
 configurations {
 	all {
