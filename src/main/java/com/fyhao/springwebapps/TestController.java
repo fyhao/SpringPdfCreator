@@ -118,6 +118,31 @@ public class TestController {
         return request;
 	}
     
+    @RequestMapping("/testrequest2")
+	public WFRequest testrequest2() throws Exception {
+    	WFRequest request = new WFRequest();
+        WFStep step = new WFStep();
+        step.action = "setVar";
+        step.name = "html";
+        String html = "<html><body>test " + new java.util.Date().toString() + "</body></html>";
+        step.value = html;
+        request.steps.add(step);
+        
+        
+        
+        step = new WFStep();
+        step.action = "generate";
+        request.steps.add(step);
+        
+        step = new WFStep();
+        step.action = "setWatermark";
+        step.text = "sample watermark";
+        step.url = "https://i.stack.imgur.com/ILTQq.png";
+        request.steps.add(step);
+        
+        return request;
+	}
+    
     @RequestMapping("/mockhttpget")
 	public String mockhttpget() throws Exception {
     	return "mock http result";
