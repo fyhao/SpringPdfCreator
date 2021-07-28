@@ -44,16 +44,19 @@ public class PdfController {
         html = html.replace(HTMLFormConstants + "=", "");
         html = html.trim();
         html = URLDecoder.decode(html, "UTF-8");
+        response.setContentType("application/pdf");
         HtmlConverter.convertToPdf(html, response.getOutputStream());
 	}
     
     @RequestMapping(value="/workflowpdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public void workflowpdf(@RequestBody WFRequest request, HttpServletResponse response) throws Exception {
-        WorkflowExecutor.generatePdf(request, response);
+    	response.setContentType("application/pdf");
+    	WorkflowExecutor.generatePdf(request, response);
 	}
     
     @RequestMapping(value="/getpdf", method = RequestMethod.GET)
 	public void workflowpdf(@RequestParam String url, HttpServletResponse response) throws Exception {
+    	response.setContentType("application/pdf");
     	RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<WFRequest> resp = restTemplate.getForEntity(url, WFRequest.class);
         WFRequest request = resp.getBody();
