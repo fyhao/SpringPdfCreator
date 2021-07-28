@@ -1,6 +1,6 @@
 {
   "name": "spring-react-app",
-  "description": "Sample application using React with Spring Boot 2021072802",
+  "description": "Sample application using React with Spring Boot 2021072803",
   "dependencies": {
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
