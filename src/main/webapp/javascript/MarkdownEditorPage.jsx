@@ -22,6 +22,7 @@ A table:
 	this.handleTextChange = this.handleTextChange.bind(this);
 	this.handleGetWorkflowJsonClick = this.handleGetWorkflowJsonClick.bind(this);
 	this.generateWorkflowJson = this.generateWorkflowJson.bind(this);
+	this.handleGeneratePdfClick = this.handleGeneratePdfClick.bind(this);
   }	
   handleTextChange(e) {
 	var text = e.target.value;
@@ -44,11 +45,27 @@ A table:
 	};
 	return json;
   }
+  handleGeneratePdfClick() {
+	var json = this.generateWorkflowJson();
+	fetch('/pdf/workflowpdf', {
+		method:'POST',
+		headers:{'Content-Type':'application/json'},
+		body:JSON.stringify(json)
+	}).then(r => r.blob())
+	.then(blob => {
+		var a = document.createElement('a')
+		var b = URL.createObjectURL(blob);
+		a.href = b;
+		a.target = '_blank';
+		a.dispatchEvent(new MouseEvent('click'))
+	});
+  }
   render() {
     return (
       <div>
         <span>Markdown Editor</span>
 		<button onClick={this.handleGetWorkflowJsonClick}>Get Workflow JSON</button>
+		<button onClick={this.handleGeneratePdfClick}>Generate PDF</button>
 		<table border="0" cellpadding="5">
 			<tr>
 				<td>

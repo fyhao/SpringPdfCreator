@@ -430,6 +430,7 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
     _this.handleTextChange = _this.handleTextChange.bind(_assertThisInitialized(_this));
     _this.handleGetWorkflowJsonClick = _this.handleGetWorkflowJsonClick.bind(_assertThisInitialized(_this));
     _this.generateWorkflowJson = _this.generateWorkflowJson.bind(_assertThisInitialized(_this));
+    _this.handleGeneratePdfClick = _this.handleGeneratePdfClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -466,11 +467,33 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
       return json;
     }
   }, {
+    key: "handleGeneratePdfClick",
+    value: function handleGeneratePdfClick() {
+      var json = this.generateWorkflowJson();
+      fetch('/pdf/workflowpdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(json)
+      }).then(function (r) {
+        return r.blob();
+      }).then(function (blob) {
+        var a = document.createElement('a');
+        var b = URL.createObjectURL(blob);
+        a.href = b;
+        a.target = '_blank';
+        a.dispatchEvent(new MouseEvent('click'));
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Markdown Editor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleGetWorkflowJsonClick
-      }, "Get Workflow JSON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+      }, "Get Workflow JSON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleGeneratePdfClick
+      }, "Generate PDF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         border: "0",
         cellpadding: "5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
