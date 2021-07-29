@@ -20,6 +20,8 @@ A table:
     super(props);
     
 	this.handleTextChange = this.handleTextChange.bind(this);
+	this.handleGetWorkflowJsonClick = this.handleGetWorkflowJsonClick.bind(this);
+	this.generateWorkflowJson = this.generateWorkflowJson.bind(this);
   }	
   handleTextChange(e) {
 	var text = e.target.value;
@@ -27,10 +29,26 @@ A table:
 	//while(html.indexOf('\n') > -1) html = html.replace('\n','<br>');
 	this.setState({text:text,html:html});
   }
+
+  handleGetWorkflowJsonClick(e) {
+	var json = this.generateWorkflowJson();
+	alert(JSON.stringify(json));
+  }
+  generateWorkflowJson() {
+	var text = this.state.text;
+	var json = {
+		"steps" : [
+			{"action":"setVar","name":"html","value":"<html><body>" + text + "</body></html>"},
+			{"action":"generate"}
+		]
+	};
+	return json;
+  }
   render() {
     return (
       <div>
         <span>Markdown Editor</span>
+		<button onClick={this.handleGetWorkflowJsonClick}>Get Workflow JSON</button>
 		<table border="0" cellpadding="5">
 			<tr>
 				<td>
