@@ -1,23 +1,31 @@
 import React, { Component } from "react";
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 
 class MarkdownEditorPage extends Component {
   state = {
-	text:'',
+	text:`> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |`,
 	html:''
   }	
   constructor(props) {
     super(props);
+    
 	this.handleTextChange = this.handleTextChange.bind(this);
-	this.markdownToHTML = this.markdownToHTML.bind(this);
   }	
   handleTextChange(e) {
 	var text = e.target.value;
-	var html = this.markdownToHTML(text);
-	this.setState({text:text, html:html});
-  }
-  markdownToHTML(text) {
 	var html = text;
-	return html;
+	//while(html.indexOf('\n') > -1) html = html.replace('\n','<br>');
+	this.setState({text:text,html:html});
   }
   render() {
     return (
@@ -29,7 +37,7 @@ class MarkdownEditorPage extends Component {
 					<textarea rows="10" cols="50" onChange={this.handleTextChange}>{this.state.text}</textarea>
 				</td>
 				<td>
-					{this.state.html}
+					<ReactMarkdown remarkPlugins={[gfm]} children={this.state.html}></ReactMarkdown>
 				</td>
 			</tr>
 		</table>
