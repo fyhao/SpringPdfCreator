@@ -5,6 +5,9 @@ class Home extends Component {
     return (
       <div>
         <span>Home</span>
+		<div>
+		   <a href="/pdf/">Generate PDF</a>
+		</div>
       </div>
     );
   }
