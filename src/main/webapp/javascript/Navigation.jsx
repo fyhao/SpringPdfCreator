@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
+import MarkdownEditorPage from './MarkdownEditorPage';
 import ee from './EventManager';
 import { NavLink,NavItem,Alert } from 'reactstrap';
 import * as MyConstants from './MyConstants';
@@ -10,7 +11,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-		currentPage:<Home />,
+		currentPage:<MarkdownEditorPage />,
 		roles : [],
 		username:'na',
 		infomsg : ''
@@ -53,7 +54,16 @@ class Navigation extends Component {
             <Navbar.Brand as={Link} to="/" >Portal</Navbar.Brand>
             <Navbar.Collapse>
               <Nav className="mr-auto" style={{ width: "50%" }}>
-			  
+			  	<NavItem>
+					<NavLink onClick={() => {ee.emit('navigatePage',{page:<Home />})}} href="#">
+						Home
+					</NavLink>
+			    </NavItem>
+				<NavItem>
+					<NavLink onClick={() => {ee.emit('navigatePage',{page:<MarkdownEditorPage />})}} href="#">
+						Markdown Editor
+					</NavLink>
+			    </NavItem>
               </Nav>
 			  <Nav className="ml-auto justify-content-end" style={{ width: "50%" }}>
 	 		    <NavItem>

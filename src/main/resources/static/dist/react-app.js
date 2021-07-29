@@ -1,6 +1,27 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _assertThisInitialized)
+/* harmony export */ });
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -345,6 +366,103 @@ var Home = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/main/webapp/javascript/MarkdownEditorPage.jsx":
+/*!***********************************************************!*\
+  !*** ./src/main/webapp/javascript/MarkdownEditorPage.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
+  _inherits(MarkdownEditorPage, _Component);
+
+  var _super = _createSuper(MarkdownEditorPage);
+
+  function MarkdownEditorPage(props) {
+    var _this;
+
+    _classCallCheck(this, MarkdownEditorPage);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      text: '',
+      html: ''
+    });
+
+    _this.handleTextChange = _this.handleTextChange.bind(_assertThisInitialized(_this));
+    _this.markdownToHTML = _this.markdownToHTML.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(MarkdownEditorPage, [{
+    key: "handleTextChange",
+    value: function handleTextChange(e) {
+      var text = e.target.value;
+      var html = this.markdownToHTML(text);
+      this.setState({
+        text: text,
+        html: html
+      });
+    }
+  }, {
+    key: "markdownToHTML",
+    value: function markdownToHTML(text) {
+      var html = text;
+      return html;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Markdown Editor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+        border: "0",
+        cellpadding: "5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        rows: "10",
+        cols: "50",
+        onChange: this.handleTextChange
+      }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, this.state.html))));
+    }
+  }]);
+
+  return MarkdownEditorPage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MarkdownEditorPage);
+
+/***/ }),
+
 /***/ "./src/main/webapp/javascript/MyConstants.jsx":
 /*!****************************************************!*\
   !*** ./src/main/webapp/javascript/MyConstants.jsx ***!
@@ -372,14 +490,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Navbar.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Navbar.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./src/main/webapp/javascript/Home.jsx");
-/* harmony import */ var _EventManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventManager */ "./src/main/webapp/javascript/EventManager.jsx");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavItem.js");
-/* harmony import */ var _MyConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MyConstants */ "./src/main/webapp/javascript/MyConstants.jsx");
+/* harmony import */ var _MarkdownEditorPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MarkdownEditorPage */ "./src/main/webapp/javascript/MarkdownEditorPage.jsx");
+/* harmony import */ var _EventManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EventManager */ "./src/main/webapp/javascript/EventManager.jsx");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavItem.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavLink.js");
+/* harmony import */ var _MyConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MyConstants */ "./src/main/webapp/javascript/MyConstants.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -410,6 +530,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Navigation = /*#__PURE__*/function (_Component) {
   _inherits(Navigation, _Component);
 
@@ -422,7 +543,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      currentPage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_1__.default, null),
+      currentPage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MarkdownEditorPage__WEBPACK_IMPORTED_MODULE_2__.default, null),
       roles: [],
       username: 'na',
       infomsg: ''
@@ -436,14 +557,14 @@ var Navigation = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
-      _EventManager__WEBPACK_IMPORTED_MODULE_2__.default.on('navigatePage', this.onNavigatePage, this);
-      _EventManager__WEBPACK_IMPORTED_MODULE_2__.default.on('infomsg', this.onInfomsg, this);
+      _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.on('navigatePage', this.onNavigatePage, this);
+      _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.on('infomsg', this.onInfomsg, this);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      _EventManager__WEBPACK_IMPORTED_MODULE_2__.default.off('navigatePage', this.onNavigatePage);
-      _EventManager__WEBPACK_IMPORTED_MODULE_2__.default.off('infomsg', this.onInfomsg);
+      _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.off('navigatePage', this.onNavigatePage);
+      _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.off('infomsg', this.onInfomsg);
     }
   }, {
     key: "onNavigatePage",
@@ -468,7 +589,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
     key: "handleDismissInfomsg",
     value: function handleDismissInfomsg() {
       var me = this;
-      _EventManager__WEBPACK_IMPORTED_MODULE_2__.default.emit('infomsg', {
+      _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.emit('infomsg', {
         msg: ''
       });
     }
@@ -480,22 +601,36 @@ var Navigation = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
         className: "navbar navbar-expand-lg navbar-dark bg-primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Brand, {
-        as: react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link,
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Brand, {
+        as: react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link,
         to: "/"
-      }, "Portal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Collapse, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }, "Portal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Collapse, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         className: "mr-auto",
         style: {
           width: "50%"
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
+        onClick: function onClick() {
+          _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.emit('navigatePage', {
+            page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_1__.default, null)
+          });
+        },
+        href: "#"
+      }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
+        onClick: function onClick() {
+          _EventManager__WEBPACK_IMPORTED_MODULE_3__.default.emit('navigatePage', {
+            page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MarkdownEditorPage__WEBPACK_IMPORTED_MODULE_2__.default, null)
+          });
+        },
+        href: "#"
+      }, "Markdown Editor"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         className: "ml-auto justify-content-end",
         style: {
           width: "50%"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_7__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__.default, {
         variant: "outline-success",
         onClick: this.handleLogoutClick
       }, "Logout")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -36626,6 +36761,106 @@ var NavItem = function NavItem(props) {
 NavItem.propTypes = propTypes;
 NavItem.defaultProps = defaultProps;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavItem);
+
+/***/ }),
+
+/***/ "./node_modules/reactstrap/es/NavLink.js":
+/*!***********************************************!*\
+  !*** ./node_modules/reactstrap/es/NavLink.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils */ "./node_modules/reactstrap/es/utils.js");
+
+
+
+
+
+
+
+
+var propTypes = {
+  tag: _utils__WEBPACK_IMPORTED_MODULE_7__.tagPropType,
+  innerRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string)]),
+  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool),
+  active: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool),
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string),
+  cssModule: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object),
+  onClick: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
+  href: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().any)
+};
+var defaultProps = {
+  tag: 'a'
+};
+
+var NavLink = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_3__.default)(NavLink, _React$Component);
+
+  function NavLink(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+    _this.onClick = _this.onClick.bind((0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__.default)(_this));
+    return _this;
+  }
+
+  var _proto = NavLink.prototype;
+
+  _proto.onClick = function onClick(e) {
+    if (this.props.disabled) {
+      e.preventDefault();
+      return;
+    }
+
+    if (this.props.href === '#') {
+      e.preventDefault();
+    }
+
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        className = _this$props.className,
+        cssModule = _this$props.cssModule,
+        active = _this$props.active,
+        Tag = _this$props.tag,
+        innerRef = _this$props.innerRef,
+        attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(_this$props, ["className", "cssModule", "active", "tag", "innerRef"]);
+
+    var classes = (0,_utils__WEBPACK_IMPORTED_MODULE_7__.mapToCssModules)(classnames__WEBPACK_IMPORTED_MODULE_6___default()(className, 'nav-link', {
+      disabled: attributes.disabled,
+      active: active
+    }), cssModule);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+      ref: innerRef,
+      onClick: this.onClick,
+      className: classes
+    }));
+  };
+
+  return NavLink;
+}(react__WEBPACK_IMPORTED_MODULE_4__.Component);
+
+NavLink.propTypes = propTypes;
+NavLink.defaultProps = defaultProps;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavLink);
 
 /***/ }),
 
