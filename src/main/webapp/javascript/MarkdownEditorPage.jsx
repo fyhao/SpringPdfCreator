@@ -13,8 +13,7 @@ class MarkdownEditorPage extends Component {
 A table:
 
 | a | b |
-| - | - |`,
-	html:''
+| - | - |`
   }	
   constructor(props) {
     super(props);
@@ -24,11 +23,13 @@ A table:
 	this.generateWorkflowJson = this.generateWorkflowJson.bind(this);
 	this.handleGeneratePdfClick = this.handleGeneratePdfClick.bind(this);
   }	
+  componentDidMount() {
+	
+  }
   handleTextChange(e) {
 	var text = e.target.value;
-	var html = text;
 	//while(html.indexOf('\n') > -1) html = html.replace('\n','<br>');
-	this.setState({text:text,html:html});
+	this.setState({text:text});
   }
 
   handleGetWorkflowJsonClick(e) {
@@ -37,9 +38,11 @@ A table:
   }
   generateWorkflowJson() {
 	var text = this.state.text;
+	// md to html
+	var html = document.getElementById('result').innerHTML;
 	var json = {
 		"steps" : [
-			{"action":"setVar","name":"html","value":"<html><body>" + text + "</body></html>"},
+			{"action":"setVar","name":"html","value":"<html><body>" + html + "</body></html>"},
 			{"action":"generate"}
 		]
 	};
@@ -71,8 +74,8 @@ A table:
 				<td>
 					<textarea rows="10" cols="50" onChange={this.handleTextChange}>{this.state.text}</textarea>
 				</td>
-				<td>
-					<ReactMarkdown remarkPlugins={[gfm]} children={this.state.html}></ReactMarkdown>
+				<td id="result">
+					<ReactMarkdown remarkPlugins={[gfm]} children={this.state.text}></ReactMarkdown>
 				</td>
 			</tr>
 		</table>

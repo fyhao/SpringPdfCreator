@@ -423,8 +423,7 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      text: "> A block quote with ~strikethrough~ and a URL: https://reactjs.org.\n\n* Lists\n* [ ] todo\n* [x] done\n\nA table:\n\n| a | b |\n| - | - |",
-      html: ''
+      text: "> A block quote with ~strikethrough~ and a URL: https://reactjs.org.\n\n* Lists\n* [ ] todo\n* [x] done\n\nA table:\n\n| a | b |\n| - | - |"
     });
 
     _this.handleTextChange = _this.handleTextChange.bind(_assertThisInitialized(_this));
@@ -435,14 +434,15 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(MarkdownEditorPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
     key: "handleTextChange",
     value: function handleTextChange(e) {
-      var text = e.target.value;
-      var html = text; //while(html.indexOf('\n') > -1) html = html.replace('\n','<br>');
+      var text = e.target.value; //while(html.indexOf('\n') > -1) html = html.replace('\n','<br>');
 
       this.setState({
-        text: text,
-        html: html
+        text: text
       });
     }
   }, {
@@ -454,12 +454,14 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
   }, {
     key: "generateWorkflowJson",
     value: function generateWorkflowJson() {
-      var text = this.state.text;
+      var text = this.state.text; // md to html
+
+      var html = document.getElementById('result').innerHTML;
       var json = {
         "steps": [{
           "action": "setVar",
           "name": "html",
-          "value": "<html><body>" + text + "</body></html>"
+          "value": "<html><body>" + html + "</body></html>"
         }, {
           "action": "generate"
         }]
@@ -500,9 +502,11 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
         rows: "10",
         cols: "50",
         onChange: this.handleTextChange
-      }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement((react_markdown__WEBPACK_IMPORTED_MODULE_1___default()), {
+      }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+        id: "result"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement((react_markdown__WEBPACK_IMPORTED_MODULE_1___default()), {
         remarkPlugins: [(remark_gfm__WEBPACK_IMPORTED_MODULE_2___default())],
-        children: this.state.html
+        children: this.state.text
       })))));
     }
   }]);
