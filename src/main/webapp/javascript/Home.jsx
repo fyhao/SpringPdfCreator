@@ -6,7 +6,7 @@ class Home extends Component {
       <div>
         <span>Home</span>
 		<div>
-		   <a href="/pdf/">Generate PDF</a>
+		   <a href="/pdf/">Generate PDF!</a>
 		</div>
       </div>
     );
