@@ -161,7 +161,7 @@ public class TestController {
         step.value = html;
         request.steps.add(step);
         
-     // add metadata
+        // add metadata
         step = new WFStep();
         step.action = "setVar";
         step.name = "metadata_title";
@@ -180,7 +180,7 @@ public class TestController {
         step = new WFStep();
         step.action = "setVar";
         step.name = "metadata_keywords";
-        step.value = "my title";
+        step.value = "my keywords";
         request.steps.add(step);
         step = new WFStep();
         step.action = "setVar";
