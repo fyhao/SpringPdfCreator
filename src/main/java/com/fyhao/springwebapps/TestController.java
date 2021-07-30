@@ -152,4 +152,50 @@ public class TestController {
 	public String mockhttpget() throws Exception {
     	return "mock http result";
 	}
+    
+    @RequestMapping("/unittest")
+	public String unittest() throws Exception {
+    	TestMgm mgm = new TestMgm();
+    	testsuite1(mgm);
+    	return mgm.htmlreport();
+	}
+    
+    public static void main(String args[]) {
+    	TestMgm mgm = new TestMgm();
+    	testsuite1(mgm);
+    	String res = mgm.report(); System.out.println(res);
+    }
+
+	public static class TestMgm {
+		int noOfTest = 0;
+		int noOfPass = 0;
+		StringBuffer sb = new StringBuffer();
+		void assertTest(Object expected, Object actual, String msg) {
+	    	noOfTest++;
+	    	if(expected.equals(actual)) {
+	    		noOfPass++;
+	    		sb.append("[PASS] - Expected [" + expected + "] Actual [" + actual + "] " + msg + "\n");
+	    	}
+	    	else {
+	    		sb.append("[FAIL] - Expected [" + expected + "] Actual [" + actual + "] " + msg + "\n");
+	    	}
+	    }
+		
+		String report() {
+			String percent = 100 * ((double)noOfPass / noOfTest) + "%";
+			sb.append("Result: " + noOfPass + "/" + noOfTest + " - " + percent);
+			return sb.toString();
+		}
+		
+		String htmlreport() {
+			String s = report();
+			s = s.replaceAll("\n","<br>");
+			return s;
+		}
+	}
+	
+	static void testsuite1(TestMgm mgm) {
+		PdfController pdf = new PdfController();
+		mgm.assertTest(true, pdf.home().contains("PDF Generation Form"), "Check PDF Generation Form");
+	}
 }
