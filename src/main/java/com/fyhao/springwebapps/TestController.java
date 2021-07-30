@@ -289,6 +289,7 @@ public class TestController {
     	testsuite1(mgm); // workflow engine valid test
     	testsuite2(mgm); // workflow engine invalid test
     	testsuite3(mgm); // workflow engine stepfactory
+    	testsuite4(mgm); // workflow engine initsteps steps
     }
     
 	static void testsuite1(TestMgm mgm) {
@@ -380,5 +381,25 @@ public class TestController {
 			mgm.assertTest(s.name, svs.name, "check SetVarStep name");
 			mgm.assertTest(s.value, svs.value, "check SetVarStep value");
 		}
+	}
+	
+	static void testsuite4(TestMgm mgm) {
+		WFContext ctx = new WFContext();
+		WFRequest request = null;
+		WFStep step = null;
+		request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var1";
+        step.value = "1";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "var2";
+        step.value = "2";
+        request.initsteps.add(step);
+        ctx.executeinit(request);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
 	}
 }
