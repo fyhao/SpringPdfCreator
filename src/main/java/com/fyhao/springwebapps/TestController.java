@@ -107,6 +107,36 @@ public class TestController {
         step.value = "httpresult";
         request.steps.add(step);
         
+        // add metadata
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "metadata_title";
+        step.value = "my title";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "metadata_author";
+        step.value = "my author";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "metadata_subject";
+        step.value = "my subject";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "metadata_keywords";
+        step.value = "my title";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "metadata_creator";
+        step.value = "my creator";
+        request.steps.add(step);
+        
+        step = new WFStep();
+        step.action = "metadata";
+        request.steps.add(step);
         
         step = new WFStep();
         step.action = "generate";

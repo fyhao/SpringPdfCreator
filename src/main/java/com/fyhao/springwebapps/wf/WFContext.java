@@ -18,6 +18,7 @@ import com.itextpdf.kernel.colors.DeviceGray;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.DocumentProperties;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfDocumentInfo;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Canvas;
@@ -103,7 +104,23 @@ public class WFContext {
 			    Image barcodeImage = new Image(barcodeObject).setWidth(100f).setHeight(100f);
 			    document.add(new Paragraph().add(barcodeImage));
 			}
+			else if(step.action.equals("metadata")) {
+				PdfDocumentInfo info = pdfDocument.getDocumentInfo();
+				if(vars.containsKey("metadata_title"))
+					info.setTitle((String)vars.get("metadata_title"));
+				if(vars.containsKey("metadata_author"))
+					info.setAuthor((String)vars.get("metadata_author"));
+				if(vars.containsKey("metadata_subject"))
+					info.setSubject((String)vars.get("metadata_subject"));
+				if(vars.containsKey("metadata_keywords"))
+					info.setKeywords((String)vars.get("metadata_keywords"));
+				if(vars.containsKey("metadata_creator"))
+					info.setCreator((String)vars.get("metadata_creator"));
+		        info.addCreationDate();
+		        info.addModDate();
+			}
 		}
+		
 	}
 	
 	public void generatePDF() throws IOException {
