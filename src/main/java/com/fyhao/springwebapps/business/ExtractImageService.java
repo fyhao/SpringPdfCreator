@@ -59,7 +59,7 @@ public class ExtractImageService {
                         {
                             ImageRenderInfo imageRenderInfo = (ImageRenderInfo) data;
                             byte[] bytes = imageRenderInfo.getImage().getImageBytes();
-                            ZipEntry zipEntry = new ZipEntry("sampleCMYK-" + index++ + ".jpg");
+                            ZipEntry zipEntry = new ZipEntry("images-" + index++ + ".jpg");
                             try {
 								zipOS.putNextEntry(zipEntry);
 								zipOS.write(bytes);
