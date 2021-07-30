@@ -59,11 +59,6 @@ public class StepFactory {
 	}
 	
 	public static WFStep createStep(WFStep step) {
-		System.out.println("StepFactory.createStep step: " + step.action);
-		System.out.println("Stepclasses : " + stepClasses.size());
-		for(Map.Entry<String,Class<?>> s : stepClasses.entrySet()) {
-			System.out.println("Stepclass: " + s.getKey());
-		}
 		Class<?> targetClass = stepClasses.get(step.action);
 		Object obj = null;
 		try {
@@ -85,43 +80,7 @@ public class StepFactory {
 		}
 		return (WFStep)obj;
 	}
-	private static Class[] getClasses(String packageName)
-	        throws ClassNotFoundException, IOException {
-		System.out.println("getClasses: " + packageName);
-	    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-	    assert classLoader != null;
-	    String path = packageName.replace('.', '/');
-	    Enumeration<URL> resources = classLoader.getResources(path);
-	    List<File> dirs = new ArrayList<File>();
-	    System.out.println("getClasses resources before");
-	    while (resources.hasMoreElements()) {
-	        URL resource = resources.nextElement();
-	        System.out.println("getClass resource: " + resource.getFile());
-	        dirs.add(new File(resource.getFile()));
-	    }
-	    ArrayList<Class> classes = new ArrayList<Class>();
-	    for (File directory : dirs) {
-	    	System.out.println("getClass dir: " + directory.getName());
-	        classes.addAll(findClasses(directory, packageName));
-	    }
-	    return classes.toArray(new Class[classes.size()]);
-	}
-	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-	    List<Class> classes = new ArrayList<Class>();
-	    if (!directory.exists()) {
-	        return classes;
-	    }
-	    File[] files = directory.listFiles();
-	    for (File file : files) {
-	        if (file.isDirectory()) {
-	            assert !file.getName().contains(".");
-	            classes.addAll(findClasses(file, packageName + "." + file.getName()));
-	        } else if (file.getName().endsWith(".class")) {
-	            classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
-	        }
-	    }
-	    return classes;
-	}
+	
 	public static void main(String args[]) {
 		WFStep s = new WFStep();
 		s.action = "setVar";
