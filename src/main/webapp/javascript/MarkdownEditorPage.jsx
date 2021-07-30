@@ -71,7 +71,7 @@ A table:
 		<button onClick={this.handleGeneratePdfClick}>Generate PDF</button>
 		<table border="0" cellpadding="5">
 			<tr>
-				<td>
+				<td valign="top">
 					<textarea rows="10" cols="50" onChange={this.handleTextChange}>{this.state.text}</textarea>
 				</td>
 				<td id="result">

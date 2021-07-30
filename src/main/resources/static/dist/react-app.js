@@ -498,7 +498,9 @@ var MarkdownEditorPage = /*#__PURE__*/function (_Component) {
       }, "Generate PDF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         border: "0",
         cellpadding: "5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+        valign: "top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         rows: "10",
         cols: "50",
         onChange: this.handleTextChange
