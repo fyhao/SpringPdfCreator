@@ -22,6 +22,7 @@ public class StepFactory {
 		try {
 			System.out.println("StepFactory static init " + PACKAGE_NAME);
 			Class[] classes = getClasses(PACKAGE_NAME);
+			System.out.println("StepFactory init len: " + classes.length);
 			for(Class clazz : classes) {
 				System.out.println("StepFactory init clazz: " + clazz.getCanonicalName());
 				if(clazz.getSuperclass().equals(WFStep.class)) {
@@ -74,17 +75,21 @@ public class StepFactory {
 	}
 	private static Class[] getClasses(String packageName)
 	        throws ClassNotFoundException, IOException {
+		System.out.println("getClasses: " + packageName);
 	    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	    assert classLoader != null;
 	    String path = packageName.replace('.', '/');
 	    Enumeration<URL> resources = classLoader.getResources(path);
 	    List<File> dirs = new ArrayList<File>();
+	    System.out.println("getClasses resources before");
 	    while (resources.hasMoreElements()) {
 	        URL resource = resources.nextElement();
+	        System.out.println("getClass resource: " + resource.getFile());
 	        dirs.add(new File(resource.getFile()));
 	    }
 	    ArrayList<Class> classes = new ArrayList<Class>();
 	    for (File directory : dirs) {
+	    	System.out.println("getClass dir: " + directory.getName());
 	        classes.addAll(findClasses(directory, packageName));
 	    }
 	    return classes.toArray(new Class[classes.size()]);
