@@ -39,6 +39,6 @@ public class TestingWebApplicationTests {
     @Test
 	public void pdfHomeShouldReturnPDFGenerationFormTitle() throws Exception {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/pdf",
-				String.class)).contains("PDF Generation Form");
+				String.class)).contains("PDF Generation Form1234");
 	}
 }
