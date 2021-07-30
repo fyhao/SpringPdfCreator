@@ -1,5 +1,7 @@
 package com.fyhao.springwebapps;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WFStep;
 import com.fyhao.springwebapps.wf.WorkflowExecutor;
@@ -197,5 +200,39 @@ public class TestController {
 	static void testsuite1(TestMgm mgm) {
 		PdfController pdf = new PdfController();
 		mgm.assertTest(true, pdf.home().contains("PDF Generation Form"), "Check PDF Generation Form");
+		
+		WFContext ctx = new WFContext();
+		mgm.assertTest(0, ctx.vars.size(), "WFContext size initialize should be 0");
+		WFRequest request = new WFRequest();
+		WFStep step = new WFStep();
+        step.action = "setVar";
+        step.name = "var1";
+        step.value = "value1";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(1, ctx.vars.size()," Should have 1 vars");
+        request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var2";
+        step.value = "value2";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
+        mgm.assertTest("value1", ctx.vars.get("var1"), "var1 = value1");
+        mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
+        request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var3";
+        step.value = "value3 with {{var1}} {{var2}}";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(3, ctx.vars.size()," Should have 3 vars");
+        mgm.assertTest("value1", ctx.vars.get("var1"), "var1 = value1");
+        mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
+        mgm.assertTest("value3 with value1 value2", ctx.vars.get("var3"), "var3");
+        
+        
 	}
 }

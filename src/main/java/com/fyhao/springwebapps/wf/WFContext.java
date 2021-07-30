@@ -29,7 +29,7 @@ import com.itextpdf.layout.property.TextAlignment;
 public class WFContext {
 
 	HttpServletResponse response;
-	Map<String,Object> vars = new HashMap<String,Object>();
+	public Map<String,Object> vars = new HashMap<String,Object>();
 	
 	PdfWriter pdfWriter;
 	PdfDocument pdfDocument;
@@ -46,19 +46,27 @@ public class WFContext {
         
 	}
 	
+	public String replaceVars(String p) {
+		for(Map.Entry<String,Object> entry: vars.entrySet()) {
+			while(p.contains("{{" + entry.getKey() + "}}")) {
+				p = p.replace("{{" + entry.getKey() + "}}", (String)entry.getValue());
+			}
+		}
+		return p;
+	}
 	
 	public void execute(WFRequest request) throws IOException {
 		for(WFStep step : request.steps) {
 			if(step.action.equals("setVar")) {
-				vars.put(step.name, step.value);
+				vars.put(step.name, replaceVars(step.value));
 			}
 			else if(step.action.equals("add")) {
-				vars.put(step.name, (String)vars.get(step.name) + (String)vars.get(step.value));
+				vars.put(step.name, (String)vars.get(step.name) + replaceVars((String)vars.get(step.value)));
 			}
 			else if(step.action.equals("httpget")) {
 				RestTemplate restTemplate = new RestTemplate();
 		        ResponseEntity<String> resp = restTemplate.getForEntity(step.url, String.class);
-		        vars.put(step.name, resp.getBody());
+		        vars.put(step.name, replaceVars(resp.getBody()));
 			}
 			else if(step.action.equals("generate")) {
 				generatePDF();
