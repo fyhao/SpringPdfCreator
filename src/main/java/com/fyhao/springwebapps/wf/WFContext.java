@@ -47,6 +47,7 @@ public class WFContext {
 	}
 	
 	public String replaceVars(String p) {
+		if(p == null) return "";
 		for(Map.Entry<String,Object> entry: vars.entrySet()) {
 			while(p.contains("{{" + entry.getKey() + "}}")) {
 				p = p.replace("{{" + entry.getKey() + "}}", (String)entry.getValue());

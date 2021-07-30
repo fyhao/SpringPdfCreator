@@ -159,20 +159,23 @@ public class TestController {
     @RequestMapping("/unittest")
 	public String unittest() throws Exception {
     	TestMgm mgm = new TestMgm();
-    	testsuite1(mgm);
+    	runTestsuite(mgm);
     	return mgm.htmlreport();
 	}
     
     public static void main(String args[]) {
     	TestMgm mgm = new TestMgm();
-    	testsuite1(mgm);
+    	runTestsuite(mgm);
     	String res = mgm.report(); System.out.println(res);
     }
+
 
 	public static class TestMgm {
 		int noOfTest = 0;
 		int noOfPass = 0;
 		StringBuffer sb = new StringBuffer();
+		long startTime = System.currentTimeMillis();
+		long endTime = 0;
 		void assertTest(Object expected, Object actual, String msg) {
 	    	noOfTest++;
 	    	if(expected.equals(actual)) {
@@ -185,8 +188,10 @@ public class TestController {
 	    }
 		
 		String report() {
+			endTime = System.currentTimeMillis();
 			String percent = 100 * ((double)noOfPass / noOfTest) + "%";
 			sb.append("Result: " + noOfPass + "/" + noOfTest + " - " + percent);
+			sb.append("\nTaken: " + (endTime - startTime) + "ms");
 			return sb.toString();
 		}
 		
@@ -197,6 +202,11 @@ public class TestController {
 		}
 	}
 	
+    static void runTestsuite(TestMgm mgm) {
+    	testsuite1(mgm); // workflow engine valid test
+    	testsuite2(mgm); // workflow engine invalid test
+    }
+    
 	static void testsuite1(TestMgm mgm) {
 		PdfController pdf = new PdfController();
 		mgm.assertTest(true, pdf.home().contains("PDF Generation Form"), "Check PDF Generation Form");
@@ -211,8 +221,7 @@ public class TestController {
         request.steps.add(step);
         try { ctx.execute(request); } catch (IOException e) {}
         mgm.assertTest(1, ctx.vars.size()," Should have 1 vars");
-        request = new WFRequest();
-		step = new WFStep();
+        step = new WFStep();
         step.action = "setVar";
         step.name = "var2";
         step.value = "value2";
@@ -221,8 +230,7 @@ public class TestController {
         mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
         mgm.assertTest("value1", ctx.vars.get("var1"), "var1 = value1");
         mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
-        request = new WFRequest();
-		step = new WFStep();
+        step = new WFStep();
         step.action = "setVar";
         step.name = "var3";
         step.value = "value3 with {{var1}} {{var2}}";
@@ -233,6 +241,44 @@ public class TestController {
         mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
         mgm.assertTest("value3 with value1 value2", ctx.vars.get("var3"), "var3");
         
+        ctx = new WFContext();
+        mgm.assertTest(0, ctx.vars.size()," Should have 0 vars");
+        request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var1";
+        step.value = "value1";
+        request.steps.add(step);
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "html";
+        step.value = "<html><body>Test {{var1}}</body></html>";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
+        mgm.assertTest("<html><body>Test value1</body></html>", ctx.vars.get("html"), "html value");
+        
+	}
+	
+	static void testsuite2(TestMgm mgm) {
+		// Doing some invalid test case
+		WFContext ctx = new WFContext();
+		WFRequest request = null;
+		WFStep step = null;
+		request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var1";
+        step.value = null;
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "html";
+        step.value = "<html><body>Test {{var1}}</body></html>";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
+        mgm.assertTest("<html><body>Test </body></html>", ctx.vars.get("html"), "html value");
         
 	}
 }
