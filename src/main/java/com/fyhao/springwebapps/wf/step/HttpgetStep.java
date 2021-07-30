@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFStep;
 
-public class HttpGetStep extends WFStep {
+public class HttpgetStep extends WFStep {
 
 	public void execute(WFContext ctx) {
 		RestTemplate restTemplate = new RestTemplate();

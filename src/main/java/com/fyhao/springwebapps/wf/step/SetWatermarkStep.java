@@ -13,7 +13,7 @@ import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.property.TextAlignment;
 
-public class SetWaterMarkStep extends WFStep {
+public class SetWatermarkStep extends WFStep {
 
 	public void execute(WFContext ctx) {
 		// Create an ImageData object
