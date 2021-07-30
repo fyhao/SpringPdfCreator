@@ -3,6 +3,7 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import MarkdownEditorPage from './MarkdownEditorPage';
+import ExtractImagePage from './ExtractImagePage';
 import ee from './EventManager';
 import { NavLink,NavItem,Alert } from 'reactstrap';
 import * as MyConstants from './MyConstants';
@@ -11,7 +12,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-		currentPage:<MarkdownEditorPage />,
+		currentPage:<ExtractImagePage />,
 		roles : [],
 		username:'na',
 		infomsg : ''
@@ -62,6 +63,11 @@ class Navigation extends Component {
 				<NavItem>
 					<NavLink onClick={() => {ee.emit('navigatePage',{page:<MarkdownEditorPage />})}} href="#">
 						Markdown Editor
+					</NavLink>
+			    </NavItem>
+				<NavItem>
+					<NavLink onClick={() => {ee.emit('navigatePage',{page:<ExtractImagePage />})}} href="#">
+						Extract Image
 					</NavLink>
 			    </NavItem>
               </Nav>

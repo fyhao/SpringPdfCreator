@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.fyhao.springwebapps.business.ExtractImageService;
+import com.fyhao.springwebapps.dto.ExtractImageRequest;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WorkflowExecutor;
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -27,6 +30,10 @@ public class PdfController {
     static Logger logger = LoggerFactory.getLogger(PdfController.class);
     
     static final String HTMLFormConstants = "htmlform" + System.currentTimeMillis();
+    
+    @Autowired
+    ExtractImageService extractImageService;
+    
     @RequestMapping("/")
 	public @ResponseBody String home() {
         String html = "<html><head><title>PDF Generation Form</title>";
@@ -61,5 +68,12 @@ public class PdfController {
         ResponseEntity<WFRequest> resp = restTemplate.getForEntity(url, WFRequest.class);
         WFRequest request = resp.getBody();
     	WorkflowExecutor.generatePdf(request, response);
+	}
+    //extractimagefrompdf
+    @RequestMapping(value="/extractimagefrompdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public void workflowpdf(@RequestBody ExtractImageRequest request, HttpServletResponse response) throws Exception {
+    	response.setContentType("application/zip");
+    	String url = request.url;
+    	extractImageService.downloadZip(url, response.getOutputStream());
 	}
 }
