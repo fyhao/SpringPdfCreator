@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fyhao.springwebapps.business.ExtractImageService;
 import com.fyhao.springwebapps.dto.ExtractImageRequest;
@@ -71,9 +72,16 @@ public class PdfController {
 	}
     //extractimagefrompdf
     @RequestMapping(value="/extractimagefrompdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public void workflowpdf(@RequestBody ExtractImageRequest request, HttpServletResponse response) throws Exception {
+	public void extractimagefrompdf(@RequestBody ExtractImageRequest request, HttpServletResponse response) throws Exception {
     	response.setContentType("application/zip");
     	String url = request.url;
     	extractImageService.downloadZip(url, response.getOutputStream());
 	}
+    //uploadpdfextractimage
+    @RequestMapping(value="/uploadpdfextractimage", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public void uploadpdfextractimage(@RequestParam MultipartFile file, HttpServletResponse response) throws Exception {
+    	response.setContentType("application/zip");
+    	extractImageService.uploadpdfextractimage(file, response.getOutputStream());
+	}
+    
 }

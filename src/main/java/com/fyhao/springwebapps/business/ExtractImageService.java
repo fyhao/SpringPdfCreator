@@ -18,6 +18,7 @@ import java.util.zip.ZipOutputStream;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -92,6 +93,12 @@ public class ExtractImageService {
 		RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> resp = restTemplate.getForEntity(url, byte[].class);
         ByteArrayInputStream bais = new ByteArrayInputStream(resp.getBody());
+        ZipOutputStream zipOS = new ZipOutputStream(os);
+        processPDFImagesIntoZip(bais, zipOS);
+	}
+	
+	public void uploadpdfextractimage(MultipartFile file, OutputStream os) throws Exception {
+		ByteArrayInputStream bais = new ByteArrayInputStream(file.getBytes());
         ZipOutputStream zipOS = new ZipOutputStream(os);
         processPDFImagesIntoZip(bais, zipOS);
 	}
