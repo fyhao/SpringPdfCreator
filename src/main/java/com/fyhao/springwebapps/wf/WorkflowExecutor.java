@@ -16,6 +16,7 @@ public class WorkflowExecutor {
 		
 		WFContext ctx = new WFContext();
 		ctx.setResponse(response);
+		ctx.executeinit(request);
 		ctx.init();
 		ctx.execute(request);
 		ctx.close();

@@ -212,6 +212,28 @@ public class TestController {
         return request;
 	}
     
+    @RequestMapping("/testrequest3")
+	public WFRequest testrequest3() throws Exception {
+    	WFRequest request = new WFRequest();
+        WFStep step = new WFStep();
+        step.action = "setVar";
+        step.name = "html";
+        String html = "<html><body>test " + new java.util.Date().toString() + "</body></html>";
+        step.value = html;
+        request.steps.add(step);
+        
+        step = new WFStep();
+        step.action = "generate";
+        request.steps.add(step);
+        
+        step = new WFStep();
+        step.action = "passwordprotect";
+        step.value = "1234";
+        request.initsteps.add(step);
+        
+        return request;
+	}
+    
     @RequestMapping("/mockhttpget")
 	public String mockhttpget() throws Exception {
     	return "mock http result";

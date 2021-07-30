@@ -6,28 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
-import com.fyhao.springwebapps.wf.step.SetVarStep;
 import com.fyhao.springwebapps.wf.step.StepFactory;
-import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.html2pdf.HtmlConverter;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.colors.ColorConstants;
-import com.itextpdf.kernel.colors.DeviceGray;
-import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.DocumentProperties;
+import com.itextpdf.kernel.pdf.EncryptionConstants;
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfDocumentInfo;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
-import com.itextpdf.layout.Canvas;
+import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.TextAlignment;
 
 public class WFContext {
 
@@ -42,9 +28,22 @@ public class WFContext {
 		this.response = response;
 	}
 	
+	public void executeinit(WFRequest request) { 
+		for(WFStep step : request.initsteps) {
+			WFStep s = StepFactory.createStep(step);
+			s.execute(this);
+		}
+	}
 
 	public void init() throws IOException {
-		pdfWriter = new PdfWriter(response.getOutputStream());
+		WriterProperties properties = new WriterProperties();
+		if(vars.containsKey("USERPASS")) {
+			byte[] USERPASS = ((String)vars.get("USERPASS")).getBytes();
+			byte[] OWNERPASS = ((String)vars.get("USERPASS")).getBytes();
+			properties.setStandardEncryption(USERPASS, OWNERPASS, EncryptionConstants.ALLOW_PRINTING,
+	                EncryptionConstants.ENCRYPTION_AES_128 | EncryptionConstants.DO_NOT_ENCRYPT_METADATA);
+		}
+		pdfWriter = new PdfWriter(response.getOutputStream(), properties);
         pdfDocument = new PdfDocument(pdfWriter, new DocumentProperties());
         
 	}
