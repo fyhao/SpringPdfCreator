@@ -92,15 +92,20 @@ public class StepFactory {
 	    	System.out.println("getClass dir: " + directory.getName());
 	        classes.addAll(findClasses(directory, packageName));
 	    }
+	    System.out.println("getClass classes len: " + classes.size());
 	    return classes.toArray(new Class[classes.size()]);
 	}
 	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-	    List<Class> classes = new ArrayList<Class>();
+	    System.out.println("findClasses: " + directory.getAbsolutePath() + " - " + packageName);
+		List<Class> classes = new ArrayList<Class>();
 	    if (!directory.exists()) {
 	        return classes;
 	    }
+	    System.out.println("findClasses exists");
 	    File[] files = directory.listFiles();
+	    System.out.println("findClasses files: " + files.length);
 	    for (File file : files) {
+	    	System.out.println("findClasses file: " + file.getAbsolutePath());
 	        if (file.isDirectory()) {
 	            assert !file.getName().contains(".");
 	            classes.addAll(findClasses(file, packageName + "." + file.getName()));
