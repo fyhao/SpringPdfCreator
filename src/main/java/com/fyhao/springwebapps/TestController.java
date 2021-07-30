@@ -14,6 +14,8 @@ import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WFStep;
 import com.fyhao.springwebapps.wf.WorkflowExecutor;
+import com.fyhao.springwebapps.wf.step.SetVarStep;
+import com.fyhao.springwebapps.wf.step.StepFactory;
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.pdf.DocumentProperties;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -264,6 +266,7 @@ public class TestController {
     static void runTestsuite(TestMgm mgm) {
     	testsuite1(mgm); // workflow engine valid test
     	testsuite2(mgm); // workflow engine invalid test
+    	testsuite3(mgm); // workflow engine stepfactory
     }
     
 	static void testsuite1(TestMgm mgm) {
@@ -339,5 +342,21 @@ public class TestController {
         mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
         mgm.assertTest("<html><body>Test </body></html>", ctx.vars.get("html"), "html value");
         
+	}
+	
+	static void testsuite3(TestMgm mgm) {
+		WFStep s = new WFStep();
+		s.action = "setVar";
+		s.name = "apple";
+		s.value = "dog";
+		WFStep r = StepFactory.createStep(s);
+		boolean t = r instanceof SetVarStep;
+		mgm.assertTest(true, t, "is SetVarStep");
+		if(t) {
+			SetVarStep svs = (SetVarStep)r;
+			mgm.assertTest(s.action, svs.action, "check SetVarStep action");
+			mgm.assertTest(s.name, svs.name, "check SetVarStep name");
+			mgm.assertTest(s.value, svs.value, "check SetVarStep value");
+		}
 	}
 }

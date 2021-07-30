@@ -7,4 +7,6 @@ public class WFStep {
 	public String value;
 	public String text;
 	public String url;
+	
+	public void execute(WFContext ctx) {}
 }
