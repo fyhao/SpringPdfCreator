@@ -44,6 +44,11 @@ public class StepFactory {
 	}
 	
 	public static WFStep createStep(WFStep step) {
+		System.out.println("StepFactory.createStep step: " + step.action);
+		System.out.println("Stepclasses : " + stepClasses.size());
+		for(Map.Entry<String,Class<?>> s : stepClasses.entrySet()) {
+			System.out.println("Stepclass: " + s.getKey());
+		}
 		Class<?> targetClass = stepClasses.get(step.action);
 		Object obj = null;
 		try {
