@@ -20,8 +20,10 @@ public class StepFactory {
 	
 	static {
 		try {
+			System.out.println("StepFactory static init " + PACKAGE_NAME);
 			Class[] classes = getClasses(PACKAGE_NAME);
 			for(Class clazz : classes) {
+				System.out.println("StepFactory init clazz: " + clazz.getCanonicalName());
 				if(clazz.getSuperclass().equals(WFStep.class)) {
 					String stepName = deriveStepName(clazz.getCanonicalName());
 					stepClasses.put(stepName, clazz);
