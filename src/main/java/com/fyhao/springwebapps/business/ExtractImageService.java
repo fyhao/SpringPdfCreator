@@ -37,7 +37,6 @@ public class ExtractImageService {
 	}
 	
 	public void processPDFImagesIntoZip(InputStream resourceStream, ZipOutputStream zipOS) throws IOException {
-		String RESULT_FOLDER = "C:\\temp";
 		try  (resourceStream)
         {
             PdfReader reader = new PdfReader(resourceStream);
@@ -83,7 +82,6 @@ public class ExtractImageService {
 	public void processPDFImagesIntoZip(String srcpdf, String destzip) throws IOException {
 		FileOutputStream zipfos = new FileOutputStream(new File(destzip));
 		ZipOutputStream zipOS = new ZipOutputStream(zipfos);
-		String RESULT_FOLDER = "C:\\temp";
 		InputStream resourceStream = new FileInputStream(new File(srcpdf));
 		processPDFImagesIntoZip(resourceStream, zipOS);
         zipfos.close();
