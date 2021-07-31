@@ -4,6 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import MarkdownEditorPage from './MarkdownEditorPage';
 import ExtractImagePage from './ExtractImagePage';
+import PasswordprotectPage from './PasswordprotectPage';
 import ee from './EventManager';
 import { NavLink,NavItem,Alert } from 'reactstrap';
 import * as MyConstants from './MyConstants';
@@ -12,7 +13,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-		currentPage:<ExtractImagePage />,
+		currentPage:<PasswordprotectPage />,
 		roles : [],
 		username:'na',
 		infomsg : ''
@@ -68,6 +69,11 @@ class Navigation extends Component {
 				<NavItem>
 					<NavLink onClick={() => {ee.emit('navigatePage',{page:<ExtractImagePage />})}} href="#">
 						Extract Image
+					</NavLink>
+			    </NavItem>
+				<NavItem>
+					<NavLink onClick={() => {ee.emit('navigatePage',{page:<PasswordprotectPage />})}} href="#">
+						Password Protect
 					</NavLink>
 			    </NavItem>
               </Nav>

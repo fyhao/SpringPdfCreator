@@ -696,17 +696,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Navbar.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Navbar.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./src/main/webapp/javascript/Home.jsx");
 /* harmony import */ var _MarkdownEditorPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MarkdownEditorPage */ "./src/main/webapp/javascript/MarkdownEditorPage.jsx");
 /* harmony import */ var _ExtractImagePage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ExtractImagePage */ "./src/main/webapp/javascript/ExtractImagePage.jsx");
-/* harmony import */ var _EventManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EventManager */ "./src/main/webapp/javascript/EventManager.jsx");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavItem.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavLink.js");
-/* harmony import */ var _MyConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MyConstants */ "./src/main/webapp/javascript/MyConstants.jsx");
+/* harmony import */ var _PasswordprotectPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PasswordprotectPage */ "./src/main/webapp/javascript/PasswordprotectPage.jsx");
+/* harmony import */ var _EventManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EventManager */ "./src/main/webapp/javascript/EventManager.jsx");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavItem.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/NavLink.js");
+/* harmony import */ var _MyConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MyConstants */ "./src/main/webapp/javascript/MyConstants.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -739,6 +740,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Navigation = /*#__PURE__*/function (_Component) {
   _inherits(Navigation, _Component);
 
@@ -751,7 +753,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      currentPage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExtractImagePage__WEBPACK_IMPORTED_MODULE_3__.default, null),
+      currentPage: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PasswordprotectPage__WEBPACK_IMPORTED_MODULE_4__.default, null),
       roles: [],
       username: 'na',
       infomsg: ''
@@ -765,14 +767,14 @@ var Navigation = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
-      _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.on('navigatePage', this.onNavigatePage, this);
-      _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.on('infomsg', this.onInfomsg, this);
+      _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.on('navigatePage', this.onNavigatePage, this);
+      _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.on('infomsg', this.onInfomsg, this);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.off('navigatePage', this.onNavigatePage);
-      _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.off('infomsg', this.onInfomsg);
+      _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.off('navigatePage', this.onNavigatePage);
+      _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.off('infomsg', this.onInfomsg);
     }
   }, {
     key: "onNavigatePage",
@@ -797,7 +799,7 @@ var Navigation = /*#__PURE__*/function (_Component) {
     key: "handleDismissInfomsg",
     value: function handleDismissInfomsg() {
       var me = this;
-      _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.emit('infomsg', {
+      _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.emit('infomsg', {
         msg: ''
       });
     }
@@ -809,43 +811,50 @@ var Navigation = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         className: "navbar navbar-expand-lg navbar-dark bg-primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Brand, {
-        as: react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link,
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Brand, {
+        as: react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link,
         to: "/"
-      }, "Portal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Collapse, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+      }, "Portal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Collapse, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
         className: "mr-auto",
         style: {
           width: "50%"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_11__.default, {
         onClick: function onClick() {
-          _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.emit('navigatePage', {
+          _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.emit('navigatePage', {
             page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_1__.default, null)
           });
         },
         href: "#"
-      }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, {
+      }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_11__.default, {
         onClick: function onClick() {
-          _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.emit('navigatePage', {
+          _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.emit('navigatePage', {
             page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MarkdownEditorPage__WEBPACK_IMPORTED_MODULE_2__.default, null)
           });
         },
         href: "#"
-      }, "Markdown Editor")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, {
+      }, "Markdown Editor")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_11__.default, {
         onClick: function onClick() {
-          _EventManager__WEBPACK_IMPORTED_MODULE_4__.default.emit('navigatePage', {
+          _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.emit('navigatePage', {
             page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExtractImagePage__WEBPACK_IMPORTED_MODULE_3__.default, null)
           });
         },
         href: "#"
-      }, "Extract Image"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+      }, "Extract Image")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_11__.default, {
+        onClick: function onClick() {
+          _EventManager__WEBPACK_IMPORTED_MODULE_5__.default.emit('navigatePage', {
+            page: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PasswordprotectPage__WEBPACK_IMPORTED_MODULE_4__.default, null)
+          });
+        },
+        href: "#"
+      }, "Password Protect"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
         className: "ml-auto justify-content-end",
         style: {
           width: "50%"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__.default, {
         variant: "outline-success",
         onClick: this.handleLogoutClick
       }, "Logout")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -860,6 +869,172 @@ var Navigation = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Navigation);
+
+/***/ }),
+
+/***/ "./src/main/webapp/javascript/PasswordprotectPage.jsx":
+/*!************************************************************!*\
+  !*** ./src/main/webapp/javascript/PasswordprotectPage.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-markdown */ "./node_modules/react-markdown/src/react-markdown.js");
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_markdown__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var remark_gfm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remark-gfm */ "./node_modules/remark-gfm/index.js");
+/* harmony import */ var remark_gfm__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(remark_gfm__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Input.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var PasswordprotectPage = /*#__PURE__*/function (_Component) {
+  _inherits(PasswordprotectPage, _Component);
+
+  var _super = _createSuper(PasswordprotectPage);
+
+  function PasswordprotectPage(props) {
+    var _this;
+
+    _classCallCheck(this, PasswordprotectPage);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      selectedFile: null,
+      url: null,
+      pwd: null
+    });
+
+    _this.handleGeneratePdfClick = _this.handleGeneratePdfClick.bind(_assertThisInitialized(_this));
+    _this.handleUrlChange = _this.handleUrlChange.bind(_assertThisInitialized(_this));
+    _this.handlePwdChange = _this.handlePwdChange.bind(_assertThisInitialized(_this));
+    _this.handleUploadChange = _this.handleUploadChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PasswordprotectPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "handleGeneratePdfClick",
+    value: function handleGeneratePdfClick() {
+      var json = {
+        "type": "extractfromurl",
+        "url": this.state.url,
+        "pwd": this.state.pwd
+      };
+      fetch('/pdf/passwordprotectfrompdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(json)
+      }).then(function (r) {
+        return r.blob();
+      }).then(function (blob) {
+        var a = document.createElement('a');
+        var b = URL.createObjectURL(blob);
+        a.href = b;
+        a.target = '_blank';
+        a.dispatchEvent(new MouseEvent('click'));
+      });
+    }
+  }, {
+    key: "handleUploadChange",
+    value: function handleUploadChange(e) {
+      e.preventDefault();
+      var file = e.target.files[0];
+      var formData = new FormData();
+      formData.append('file', file);
+      formData.append('pwd', this.state.pwd);
+      fetch('pdf/uploadpdfpasswordprotect', {
+        method: 'post',
+        body: formData
+      }).then(function (r) {
+        return r.blob();
+      }).then(function (blob) {
+        var a = document.createElement('a');
+        var b = URL.createObjectURL(blob);
+        a.href = b;
+        a.target = '_blank';
+        a.dispatchEvent(new MouseEvent('click'));
+      });
+    }
+  }, {
+    key: "handleUrlChange",
+    value: function handleUrlChange(e) {
+      this.setState({
+        url: e.target.value
+      });
+    }
+  }, {
+    key: "handlePwdChange",
+    value: function handlePwdChange(e) {
+      this.setState({
+        pwd: e.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+        type: "text",
+        name: "pwd",
+        id: "url",
+        onChange: this.handlePwdChange,
+        value: this.state.pwd
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+        type: "file",
+        name: "fileupload",
+        id: "fileupload",
+        onChange: this.handleUploadChange
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+        type: "text",
+        name: "url",
+        id: "url",
+        onChange: this.handleUrlChange,
+        value: this.state.url
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleGeneratePdfClick
+      }, "Generate PDF")));
+    }
+  }]);
+
+  return PasswordprotectPage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PasswordprotectPage);
 
 /***/ }),
 

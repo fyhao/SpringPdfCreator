@@ -19,7 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fyhao.springwebapps.business.ExtractImageService;
+import com.fyhao.springwebapps.business.PasswordprotectService;
 import com.fyhao.springwebapps.dto.ExtractImageRequest;
+import com.fyhao.springwebapps.dto.PasswordprotectRequest;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WorkflowExecutor;
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -34,6 +36,9 @@ public class PdfController {
     
     @Autowired
     ExtractImageService extractImageService;
+    
+    @Autowired
+    PasswordprotectService passwordprotectService;
     
     @RequestMapping("/")
 	public @ResponseBody String home() {
@@ -82,6 +87,21 @@ public class PdfController {
 	public void uploadpdfextractimage(@RequestParam MultipartFile file, HttpServletResponse response) throws Exception {
     	response.setContentType("application/zip");
     	extractImageService.uploadpdfextractimage(file, response.getOutputStream());
+	}
+    
+  //extractimagefrompdf
+    @RequestMapping(value="/passwordprotectfrompdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public void passwordprotectfrompdf(@RequestBody PasswordprotectRequest request, HttpServletResponse response) throws Exception {
+    	response.setContentType("application/pdf");
+    	String url = request.url;
+    	String pwd = request.pwd;
+    	passwordprotectService.downloadPDF(url, pwd, response.getOutputStream());
+	}
+    //uploadpdfextractimage
+    @RequestMapping(value="/uploadpdfpasswordprotect", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public void uploadpdfpasswordprotect(@RequestParam MultipartFile file, @RequestParam String pwd, HttpServletResponse response) throws Exception {
+    	response.setContentType("application/pdf");
+    	passwordprotectService.uploadpdfpasswordprotect(file, pwd, response.getOutputStream());
 	}
     
 }
