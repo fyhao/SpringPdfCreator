@@ -1,6 +1,9 @@
 package com.fyhao.springwebapps;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -290,6 +293,7 @@ public class TestController {
     	testsuite2(mgm); // workflow engine invalid test
     	testsuite3(mgm); // workflow engine stepfactory
     	testsuite4(mgm); // workflow engine initsteps steps
+    	testsuite5(mgm); // workflow engine scripting
     }
     
 	static void testsuite1(TestMgm mgm) {
@@ -321,6 +325,9 @@ public class TestController {
         step.value = "value3 with {{var1}} {{var2}}";
         request.steps.add(step);
         try { ctx.execute(request); } catch (IOException e) {}
+        for(Map.Entry<String,Object> entry: ctx.vars.entrySet()) {
+        	System.out.println("entry: " + entry.getKey() + " - " + entry.getValue());
+        }
         mgm.assertTest(3, ctx.vars.size()," Should have 3 vars");
         mgm.assertTest("value1", ctx.vars.get("var1"), "var1 = value1");
         mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
@@ -401,5 +408,36 @@ public class TestController {
         ctx.executeinit(request);
         try { ctx.execute(request); } catch (IOException e) {}
         mgm.assertTest(2, ctx.vars.size()," Should have 2 vars");
+	}
+	static void testsuite5(TestMgm mgm) {
+		// 1) scripting in variables 2) new step for scripting
+		String p = "test {{var1}} {{var2}}";
+		List<String> s = new WFContext().extractvarsbracket(p);
+		mgm.assertTest("{{var1}}", s.get(0), "Check extractvarsbracket 1/2");
+		mgm.assertTest("{{var2}}", s.get(1), "Check extractvarsbracket 2/2");
+		
+		WFContext ctx = new WFContext();
+		WFRequest request = null;
+		WFStep step = null;
+		request = new WFRequest();
+		step = new WFStep();
+        step.action = "setVar";
+        step.name = "var1";
+        step.value = "1";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "var2";
+        step.value = "{{var1}}";
+        request.steps.add(step);
+        step = new WFStep();
+        step.action = "setVar";
+        step.name = "var3";
+        step.value = "{{int(var1)+1}} - {{int(var1)+2}}";
+        request.steps.add(step);
+        try { ctx.execute(request); } catch (IOException e) {}
+        mgm.assertTest(3, ctx.vars.size()," Should have 3 vars");
+        mgm.assertTest("1", ctx.vars.get("var2"), "var2 value");
+        mgm.assertTest("2.0 - 3.0", ctx.vars.get("var3"), "var3 value");
 	}
 }
