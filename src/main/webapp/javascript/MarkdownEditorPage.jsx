@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 
+import { Button } from 'reactstrap';
+import ee from './EventManager';
 class MarkdownEditorPage extends Component {
   state = {
 	text:`> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
@@ -67,17 +69,19 @@ A table:
     return (
       <div>
         <span>Markdown Editor</span>
-		<button onClick={this.handleGetWorkflowJsonClick}>Get Workflow JSON</button>
-		<button onClick={this.handleGeneratePdfClick}>Generate PDF</button>
-		<table border="0" cellpadding="5">
+		<Button onClick={this.handleGetWorkflowJsonClick}>Get Workflow JSON</Button>
+		<Button onClick={this.handleGeneratePdfClick}>Generate PDF</Button>
+		<table border="0" cellPadding="5">
+			<tbody>
 			<tr>
 				<td valign="top">
-					<textarea rows="10" cols="50" onChange={this.handleTextChange}>{this.state.text}</textarea>
+					<textarea rows="10" cols="50" onChange={this.handleTextChange} value={this.state.text}></textarea>
 				</td>
 				<td id="result">
 					<ReactMarkdown remarkPlugins={[gfm]} children={this.state.text}></ReactMarkdown>
 				</td>
 			</tr>
+			</tbody>
 		</table>
       </div>
     );

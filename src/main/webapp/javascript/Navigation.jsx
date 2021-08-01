@@ -85,7 +85,13 @@ class Navigation extends Component {
             </Navbar.Collapse>
           </Navbar>
         </div>
-		
+		{this.state.infomsg != '' &&
+			<div>
+				<Alert color={this.state.infocolor} onClick={this.handleDismissInfomsg}>
+					{this.state.infomsg}
+				</Alert>
+			</div>
+		}
         <div style={{margin:"10px"}}>
 			{this.state.currentPage}
         </div>
