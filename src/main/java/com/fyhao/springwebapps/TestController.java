@@ -35,6 +35,11 @@ public class TestController {
         logger.info("Greeting");
 		return "Hello, World";
     }
+	
+	@RequestMapping("/testenv")
+	public String testenv() {
+		return System.getProperty("testenv");
+	}
     
     @RequestMapping("/testpdf")
 	public void testpdf(HttpServletResponse response) throws Exception {
