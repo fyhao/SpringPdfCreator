@@ -64,8 +64,8 @@ public class WFContext {
 		return result;
 	}
 	
-	ScriptEngineManager manager = null;
-	ScriptEngine scriptEngine = null;
+	static ScriptEngineManager manager = null;
+	static ScriptEngine scriptEngine = null;
 	String utilsrc = "function int(a) {return java.lang.Integer.parseInt(a);}";
 	
 	public String replaceVars(String p) {
