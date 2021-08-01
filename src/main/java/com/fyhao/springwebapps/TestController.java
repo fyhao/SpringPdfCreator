@@ -361,9 +361,6 @@ public class TestController {
         step.value = "value3 with {{var1}} {{var2}}";
         request.steps.add(step);
         try { ctx.execute(request); } catch (IOException e) {}
-        for(Map.Entry<String,Object> entry: ctx.vars.entrySet()) {
-        	System.out.println("entry: " + entry.getKey() + " - " + entry.getValue());
-        }
         mgm.assertTest(3, ctx.vars.size()," Should have 3 vars");
         mgm.assertTest("value1", ctx.vars.get("var1"), "var1 = value1");
         mgm.assertTest("value2", ctx.vars.get("var2"), "var2 = value2");
