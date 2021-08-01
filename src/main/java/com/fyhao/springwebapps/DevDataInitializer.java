@@ -11,6 +11,6 @@ public class DevDataInitializer implements CommandLineRunner {
 	@Override
     public void run(String... args) throws Exception {
 		System.out.println("Run DevDataInitializer");
-		System.setProperty("testenv", "dev");
+		
 	}
 }

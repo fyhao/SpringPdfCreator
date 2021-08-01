@@ -38,7 +38,7 @@ public class TestController {
 	
 	@RequestMapping("/testenv")
 	public String testenv() {
-		return System.getProperty("testenv");
+		return System.getenv("testenv");
 	}
     
     @RequestMapping("/testpdf")
