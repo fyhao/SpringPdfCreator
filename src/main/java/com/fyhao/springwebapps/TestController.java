@@ -1,7 +1,7 @@
 package com.fyhao.springwebapps;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fyhao.springwebapps.business.HttpDbService;
 import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WFStep;
@@ -30,6 +35,9 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 public class TestController {
 
 	static Logger logger = LoggerFactory.getLogger(TestController.class);
+	@Autowired
+	HttpDbService httpDbService;
+	
 	@RequestMapping("/")
 	public @ResponseBody String greeting() {
         logger.info("Greeting");
@@ -40,6 +48,14 @@ public class TestController {
 	public String testenv() {
 		return System.getenv("testenv");
 	}
+	
+	@RequestMapping("/testhttpdb")
+	public String testhttpdb() {
+		String s = "";
+		s += httpDbService.queryRowByField("testdb", "name", "1234");
+		return s;
+	}
+    
     
     @RequestMapping("/testpdf")
 	public void testpdf(HttpServletResponse response) throws Exception {
@@ -245,6 +261,21 @@ public class TestController {
     @RequestMapping("/mockhttpget")
 	public String mockhttpget() throws Exception {
     	return "mock http result";
+	}
+    
+    @RequestMapping(value="/mockhttpdb",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public Map<String,Object> mockhttpdb(@RequestBody Map<String,Object> req) throws Exception {
+    	Map<String,Object> res = new HashMap<String,Object>();
+    	res.put("status","100");
+    	String action = (String)req.get("action");
+    	if(action.equals("queryRowByField")) {
+    		res.put("status", "0");
+    		Map<String,Object> data = new HashMap<String,Object>();
+    		data.put("name", "testname");
+    		data.put((String)req.get("field"), (String)req.get("id"));
+    		res.put("data", data);
+    	}
+    	return res;
 	}
     
     @RequestMapping("/unittest")
