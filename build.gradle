@@ -48,7 +48,7 @@ dependencies {
 
     implementation("com.h2database:h2:1.4.200")
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
-    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.3.1.jre8-preview'
+    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.4.0.jre8'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.2'
