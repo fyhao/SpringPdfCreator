@@ -75,7 +75,7 @@ dependencies {
     implementation 'com.itextpdf:barcodes:7.1.16'
     implementation 'com.itextpdf:font-asian:7.1.16'
     implementation 'com.itextpdf:hyph:7.2.0'
-    implementation group: 'com.itextpdf', name: 'html2pdf', version: '3.0.5'
+    implementation group: 'com.itextpdf', name: 'html2pdf', version: '4.0.0'
 }
 configurations {
 	all {
