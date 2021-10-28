@@ -69,7 +69,7 @@ dependencies {
     implementation 'com.itextpdf:kernel:7.2.0'
     implementation 'com.itextpdf:io:7.2.0'
     implementation 'com.itextpdf:layout:7.2.0'
-    implementation 'com.itextpdf:forms:7.1.16'
+    implementation 'com.itextpdf:forms:7.2.0'
     implementation 'com.itextpdf:pdfa:7.2.0'
     implementation 'com.itextpdf:sign:7.2.0'
     implementation 'com.itextpdf:barcodes:7.1.16'
