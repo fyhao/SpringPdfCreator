@@ -72,7 +72,7 @@ dependencies {
     implementation 'com.itextpdf:forms:7.2.0'
     implementation 'com.itextpdf:pdfa:7.2.0'
     implementation 'com.itextpdf:sign:7.2.0'
-    implementation 'com.itextpdf:barcodes:7.1.16'
+    implementation 'com.itextpdf:barcodes:7.2.0'
     implementation 'com.itextpdf:font-asian:7.1.16'
     implementation 'com.itextpdf:hyph:7.2.0'
     implementation group: 'com.itextpdf', name: 'html2pdf', version: '3.0.5'
