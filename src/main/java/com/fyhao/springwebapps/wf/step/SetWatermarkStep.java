@@ -1,21 +1,12 @@
 package com.fyhao.springwebapps.wf.step;
 
-import java.net.MalformedURLException;
-
 import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFStep;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.colors.DeviceGray;
-import com.itextpdf.kernel.geom.Rectangle;
-import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
-import com.itextpdf.layout.Canvas;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.property.TextAlignment;
 
 public class SetWatermarkStep extends WFStep {
 
 	public void execute(WFContext ctx) {
+		/*
 		// Create an ImageData object
         String imageFile = url;
         ImageData data = null;
@@ -44,5 +35,6 @@ public class SetWatermarkStep extends WFStep {
         // adding template to document
         Image imagew = new Image(template);
         ctx.document.add(imagew);
+        */
 	}
 }
