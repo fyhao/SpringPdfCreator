@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.itextpdf:itext7-core:7.2.0'
     implementation 'com.itextpdf:kernel:7.2.0'
     implementation 'com.itextpdf:io:7.2.0'
-    implementation 'com.itextpdf:layout:7.2.0'
+    implementation 'com.itextpdf:layout:7.2.1'
     implementation 'com.itextpdf:forms:7.2.0'
     implementation 'com.itextpdf:pdfa:7.2.0'
     implementation 'com.itextpdf:sign:7.2.0'
