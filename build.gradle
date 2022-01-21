@@ -6,7 +6,7 @@ buildscript {
 		}
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.2")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.3")
         classpath "com.github.jk1:gradle-license-report:2.1"
         classpath 'org.owasp:dependency-check-gradle:6.5.3'
     }
@@ -64,7 +64,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.6.3') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-    implementation("org.springframework.boot:spring-boot-starter-activemq:2.6.2")
+    implementation("org.springframework.boot:spring-boot-starter-activemq:2.6.3")
     implementation 'com.itextpdf:itext7-core:7.2.0'
     implementation 'com.itextpdf:kernel:7.2.1'
     implementation 'com.itextpdf:io:7.2.0'
