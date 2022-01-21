@@ -46,7 +46,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.2")
     implementation("org.springframework.boot:spring-boot-starter-data-rest:2.6.2")
 
-    implementation("com.h2database:h2:2.0.206")
+    implementation("com.h2database:h2:2.1.210")
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
     implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '10.1.0.jre8-preview'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
