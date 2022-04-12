@@ -67,7 +67,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-activemq:2.6.6")
     implementation 'com.itextpdf:itext7-core:7.2.2'
     implementation 'com.itextpdf:kernel:7.2.2'
-    implementation 'com.itextpdf:io:7.2.1
+    implementation 'com.itextpdf:io:7.2.2'
     implementation 'com.itextpdf:layout:7.2.2'
     implementation 'com.itextpdf:forms:7.2.2'
     implementation 'com.itextpdf:pdfa:7.2.2'
