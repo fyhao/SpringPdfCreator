@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.6")
         classpath "com.github.jk1:gradle-license-report:2.1"
-        classpath 'org.owasp:dependency-check-gradle:7.0.3'
+        classpath 'org.owasp:dependency-check-gradle:7.0.4.1'
     }
 }
 
@@ -46,7 +46,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
     implementation("org.springframework.boot:spring-boot-starter-data-rest:2.6.6")
 
-    implementation("com.h2database:h2:2.1.210")
+    implementation("com.h2database:h2:2.1.212")
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
     implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '11.1.0.jre8-preview'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
@@ -65,16 +65,16 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
     implementation("org.springframework.boot:spring-boot-starter-activemq:2.6.6")
-    implementation 'com.itextpdf:itext7-core:7.2.1'
-    implementation 'com.itextpdf:kernel:7.2.1'
+    implementation 'com.itextpdf:itext7-core:7.2.2'
+    implementation 'com.itextpdf:kernel:7.2.2'
     implementation 'com.itextpdf:io:7.2.1'
     implementation 'com.itextpdf:layout:7.2.1'
-    implementation 'com.itextpdf:forms:7.2.1'
+    implementation 'com.itextpdf:forms:7.2.2'
     implementation 'com.itextpdf:pdfa:7.2.1'
     implementation 'com.itextpdf:sign:7.2.1'
-    implementation 'com.itextpdf:barcodes:7.2.1'
+    implementation 'com.itextpdf:barcodes:7.2.2'
     implementation 'com.itextpdf:font-asian:7.2.1'
-    implementation 'com.itextpdf:hyph:7.2.1'
+    implementation 'com.itextpdf:hyph:7.2.2'
     implementation group: 'com.itextpdf', name: 'html2pdf', version: '4.0.1'
 }
 configurations {
