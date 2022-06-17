@@ -24,6 +24,13 @@ class ListView extends Component {
 			  if(field.render) {
 				  v = field.render(v,row);
 			  }
+			  if(field.clickable) {
+				var clickablestyle = {cursor:'pointer'};
+				if(field.clickablestyle) {
+					clickablestyle = {...clickablestyle,...field.clickablestyle};
+				}
+				v = <span style={clickablestyle} onClick={this.onGridCellClick(row, field.key, v)}>{v}</span>
+			  }
 			  rowItems.push(v)
 		  })
 		  return (<tr key={i}>
@@ -52,6 +59,12 @@ class ListView extends Component {
 	  const options = this.props.options;
 	  return () => {
 		  options.handleDelete(row);
+	  };
+  }
+  onGridCellClick(row, fieldkey, fieldvalue) {
+	  const options = this.props.options;
+	  return () => {
+	      options.handleGridCellClick(row, fieldkey, fieldvalue);
 	  };
   }
 }
