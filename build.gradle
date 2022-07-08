@@ -65,7 +65,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
     implementation("org.springframework.boot:spring-boot-starter-activemq:2.7.1")
-    implementation 'com.itextpdf:itext7-core:7.2.2'
+    implementation 'com.itextpdf:itext7-core:7.2.3'
     implementation 'com.itextpdf:kernel:7.2.2'
     implementation 'com.itextpdf:io:7.2.2'
     implementation 'com.itextpdf:layout:7.2.2'
