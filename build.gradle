@@ -23,8 +23,8 @@ apply plugin: "com.github.jk1.dependency-license-report"
 apply plugin: 'org.owasp.dependencycheck'
 
 bootJar {
-    baseName = 'SpringPdfCreator'
-    version = '0.1.0'
+    archiveBaseName = 'SpringPdfCreator'
+    archiveVersion = '0.1.0'
 }
 
 repositories {
