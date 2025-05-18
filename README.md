@@ -39,3 +39,13 @@ Example usage in workflow JSON:
 
 The `toc` step will insert a new page with the title "Table of Contents" and the
 specified entries.
+
+## Test Cases
+
+### ExtractImageService Test
+
+A test case has been added to verify the functionality of the `ExtractImageService` class. This test ensures that images are correctly extracted from a PDF and saved into a ZIP file.
+
+### PasswordprotectService Test
+
+A test case has been added to verify the functionality of the `PasswordprotectService` class. This test ensures that a PDF can be password protected and the resulting PDF is correctly encrypted.
