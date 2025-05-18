@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fyhao.springwebapps.business.ExtractImageService;
 import com.fyhao.springwebapps.business.PasswordprotectService;
 import com.fyhao.springwebapps.dto.ExtractImageRequest;
+import com.fyhao.springwebapps.dto.MergePdfRequest;
 import com.fyhao.springwebapps.dto.PasswordprotectRequest;
 import com.fyhao.springwebapps.wf.WFRequest;
 import com.fyhao.springwebapps.wf.WorkflowExecutor;
@@ -99,9 +100,27 @@ public class PdfController {
 	}
     //uploadpdfextractimage
     @RequestMapping(value="/uploadpdfpasswordprotect", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void uploadpdfpasswordprotect(@RequestParam MultipartFile file, @RequestParam String pwd, HttpServletResponse response) throws Exception {
-    	response.setContentType("application/pdf");
-    	passwordprotectService.uploadpdfpasswordprotect(file, pwd, response.getOutputStream());
-	}
+        public void uploadpdfpasswordprotect(@RequestParam MultipartFile file, @RequestParam String pwd, HttpServletResponse response) throws Exception {
+        response.setContentType("application/pdf");
+        passwordprotectService.uploadpdfpasswordprotect(file, pwd, response.getOutputStream());
+        }
+
+    /**
+     * Merge multiple PDF URLs into a single PDF.
+     *
+     * @param request  contains list of PDF URLs
+     */
+    @RequestMapping(value="/mergepdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+        public void mergepdf(@RequestBody MergePdfRequest request, HttpServletResponse response) throws Exception {
+        response.setContentType("application/pdf");
+
+        WFRequest wf = new WFRequest();
+        com.fyhao.springwebapps.wf.step.MergeStep mstep = new com.fyhao.springwebapps.wf.step.MergeStep();
+        mstep.action = "merge";
+        mstep.urls = request.urls.toArray(new String[0]);
+        wf.steps.add(mstep);
+
+        WorkflowExecutor.generatePdf(wf, response);
+        }
     
 }
