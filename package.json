@@ -3,8 +3,6 @@
   "description": "Sample application using React with Spring Boot 2021072803",
   "dependencies": {
     "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
     "bootstrap": "^4.6.0",
     "css-loader": "^5.0.2",
@@ -21,6 +19,12 @@
     "webpack-cli": "^4.5.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "babel-jest": "^29.7.0",
+    "jest-environment-jsdom": "^28.1.1",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
     "webpack": "^5.39.1"
