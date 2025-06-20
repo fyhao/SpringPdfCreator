@@ -6,7 +6,7 @@ buildscript {
 		}
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.5")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.5.3")
         classpath "com.github.jk1:gradle-license-report:2.1"
         classpath 'org.owasp:dependency-check-gradle:7.3.0'
     }
@@ -41,10 +41,10 @@ dependencies {
     
     compileOnly("org.springframework.boot:spring-boot-devtools")  
     implementation("org.springframework.boot:spring-boot-starter-security")
-	  implementation("org.springframework.boot:spring-boot-starter-web:2.7.5")
-	  implementation 'org.springframework.boot:spring-boot-starter-log4j2:2.7.5'
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.5")
-    implementation("org.springframework.boot:spring-boot-starter-data-rest:2.7.5")
+	  implementation("org.springframework.boot:spring-boot-starter-web:3.5.3")
+	  implementation 'org.springframework.boot:spring-boot-starter-log4j2:3.5.3'
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.5.3")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest:3.5.3")
 
     implementation("com.h2database:h2:2.1.214")
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
@@ -55,7 +55,7 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.1'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
     implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '10.1.10'
-    implementation("org.springframework.boot:spring-boot-starter-websocket:2.7.5")
+    implementation("org.springframework.boot:spring-boot-starter-websocket:3.5.3")
     implementation("org.webjars:webjars-locator-core")
     implementation("org.webjars:sockjs-client:1.5.1")
     implementation("org.webjars:stomp-websocket:2.3.4")
@@ -64,7 +64,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.4') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-    implementation("org.springframework.boot:spring-boot-starter-activemq:2.7.5")
+    implementation("org.springframework.boot:spring-boot-starter-activemq:3.5.3")
     implementation 'com.itextpdf:itext7-core:7.2.3'
     implementation 'com.itextpdf:kernel:7.2.5'
     implementation 'com.itextpdf:io:7.2.3'
