@@ -123,4 +123,41 @@ public class SignatureStepTests {
         
         resultPdf.close();
     }
+    
+    @Test
+    public void testSignatureWithCustomPosition() throws Exception {
+        // Create a simple PDF document
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(baos);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document doc = new Document(pdfDoc);
+        doc.add(new Paragraph("Test document with custom signature position"));
+        
+        // Create context with the PDF
+        WFContext ctx = new WFContext();
+        ctx.pdfDocument = pdfDoc;
+        ctx.document = doc;
+        
+        // Create signature step with custom position
+        SignatureStep step = new SignatureStep();
+        step.action = "signature";
+        step.name = "CustomPositionSig";
+        step.value = "1";
+        step.text = "100,150,250,80"; // x, y, width, height
+        step.execute(ctx);
+        
+        // Close document
+        doc.close();
+        
+        // Read the PDF and verify signature field was added
+        byte[] pdfBytes = baos.toByteArray();
+        PdfDocument resultPdf = new PdfDocument(new PdfReader(new ByteArrayInputStream(pdfBytes)));
+        PdfAcroForm acroForm = PdfAcroForm.getAcroForm(resultPdf, false);
+        
+        assertNotNull(acroForm, "AcroForm should exist");
+        PdfFormField signatureField = acroForm.getField("CustomPositionSig");
+        assertNotNull(signatureField, "Signature field with custom position should be added");
+        
+        resultPdf.close();
+    }
 }

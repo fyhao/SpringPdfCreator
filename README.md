@@ -72,13 +72,24 @@ The `signature` step adds a signature field to the PDF that can be digitally sig
 **Properties:**
 - `name`: Name of the signature field (default: "Signature")
 - `value`: Page number where signature should appear (default: 1)
+- `text`: Optional position and size in format "x,y,width,height" in points (default: "36,36,200,100")
 
-**Example:**
+**Example with default position:**
 ```json
 {
   "action": "signature",
   "name": "AuthorSignature",
   "value": "1"
+}
+```
+
+**Example with custom position:**
+```json
+{
+  "action": "signature",
+  "name": "ClientSignature",
+  "value": "1",
+  "text": "100,150,250,80"
 }
 ```
 

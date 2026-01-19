@@ -77,13 +77,6 @@ public class WorkflowSignatureIntegrationTests {
         assertTrue(pdfBytes.length > 0, "PDF should be generated");
         assertTrue(pdfBytes[0] == 0x25 && pdfBytes[1] == 0x50 && pdfBytes[2] == 0x44 && pdfBytes[3] == 0x46, 
                    "Should be a valid PDF file");
-        
-        // Optionally save for manual inspection (commented out for CI)
-        // File outputFile = new File("/tmp/workflow_with_signature.pdf");
-        // try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-        //     fos.write(pdfBytes);
-        // }
-        // System.out.println("PDF saved to: " + outputFile.getAbsolutePath());
     }
     
     @Test
