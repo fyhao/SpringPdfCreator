@@ -1,51 +1,61 @@
 # SpringPdfCreator
 
-This project provides endpoints for PDF manipulation using Spring Boot and iText.
+Spring Boot and React application for generating and manipulating PDFs with iText.
 
-## Merge PDF Endpoint
+## Build and test
 
-`POST /pdf/mergepdf`
-
-Accepts JSON body:
-
-```json
-{
-  "urls": ["http://example.com/file1.pdf", "http://example.com/file2.pdf"]
-}
+```bash
+./gradlew test
+npm ci
+npm test -- --runInBand
+npm run build
 ```
 
-Returns the merged PDF created via `MergeStep` workflow.
+GitHub Actions runs the Java and React tests and creates the production React bundle on every push and pull request.
 
-## Table of Contents Step
+## Generate a PDF
 
-A `toc` step can be added to a workflow to create a simple table of contents page.
-The step reads a list of entries from the `toc_entries` variable and writes them
-into the PDF between page breaks.
-
-Example usage in workflow JSON:
+`POST /pdf/workflowpdf` accepts a JSON workflow. Variables use `{{name}}` placeholders.
 
 ```json
 {
+  "metadata": {"title": "Example", "author": "SpringPdfCreator"},
   "steps": [
+    {"action": "setVar", "name": "customer", "value": "Yong Hao"},
+    {"action": "setVar", "name": "html", "value": "<h1>Hello {{customer}}</h1>"},
     {"action": "generate"},
-    {"action": "toc"}
-  ],
-  "initsteps": [
-    {"action": "setVar", "name": "html", "value": "<h1>Document</h1>"},
-    {"action": "setVar", "name": "toc_entries", "value": ["Section 1", "Section 2"]}
+    {"action": "toc", "entries": ["Introduction", "Details"]},
+    {"action": "setWatermark", "text": "CONFIDENTIAL", "opacity": 0.25, "rotation": 45},
+    {"action": "signature", "text": "Approved by Example"}
   ]
 }
 ```
 
-The `toc` step will insert a new page with the title "Table of Contents" and the
-specified entries.
+Supported actions include `setVar`, `add`, `generate`, `metadata`, `barcode`, `passwordprotect`, `setWatermark`, `toc`, `signature`, `merge`, `httpget`, `httpWorkflow`, and `script`. `httpWorkflow` downloads a JSON workflow and runs its steps as a subflow.
 
-## Test Cases
+## PDF utilities
 
-### ExtractImageService Test
+- `POST /pdf/mergepdf`: merge the PDF URLs in `{"urls": [...]}`.
+- `POST /pdf/extractimagefrompdf`: extract images from a PDF URL into ZIP.
+- `POST /pdf/uploadpdfextractimage`: extract images from an uploaded PDF.
+- `POST /pdf/passwordprotectfrompdf`: use `operation: "add"` to encrypt or `operation: "remove"` to decrypt a URL-hosted PDF.
+- `POST /pdf/uploadpdfpasswordprotect`: multipart upload with `file`, `pwd`, and `operation` (`add` or `remove`).
 
-A test case has been added to verify the functionality of the `ExtractImageService` class. This test ensures that images are correctly extracted from a PDF and saved into a ZIP file.
+## Optional Firebase audit logging
 
-### PasswordprotectService Test
+Successful PDF operations are delivered asynchronously to Firebase Realtime Database when configured. Keep these values in Heroku/host environment configuration, never in source control:
 
-A test case has been added to verify the functionality of the `PasswordprotectService` class. This test ensures that a PDF can be password protected and the resulting PDF is correctly encrypted.
+- `FIREBASE_DATABASE_URL` — for example `https://project-id-default-rtdb.firebaseio.com`
+- `FIREBASE_DATABASE_AUTH` — optional database auth token
+
+When the URL is absent, auditing is disabled without affecting PDF generation.
+
+## HTTP DB client protocol
+
+Set `HTTP_DB_URL` to a JSON endpoint. `HttpDbService` supports `insert`, `queryRowByField`, `queryList`, `update`, `delete`, `insertMany`, and `updateMany`. Requests contain `action`, `entity`, and action-specific `data`/criteria fields; responses return a `data` field.
+
+## Web pages
+
+- Markdown editor: live preview, local autosave, snippets, metadata, and watermark.
+- Password protection: upload or URL input with add/remove modes.
+- Image extraction: upload or URL input with ZIP output.
