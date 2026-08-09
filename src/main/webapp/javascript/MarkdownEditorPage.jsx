@@ -10,6 +10,7 @@ class MarkdownEditorPage extends Component {
     author: localStorage.getItem('md_author') || '',
     subject: localStorage.getItem('md_subject') || '',
     title: localStorage.getItem('md_title') || '',
+	watermark: localStorage.getItem('md_watermark') || '',
     snippet: '',
     snippets: [
       { label: 'Hello World', value: '```js\nconsole.log("Hello, world!");\n```' },
@@ -67,7 +68,8 @@ class MarkdownEditorPage extends Component {
       },
       steps: [
         { action: 'setVar', name: 'html', value: '<html><body>' + html + '</body></html>' },
-        { action: 'generate' }
+		{ action: 'generate' },
+		...(this.state.watermark ? [{ action: 'setWatermark', text: this.state.watermark }] : [])
       ]
     };
     return json;
@@ -90,13 +92,15 @@ class MarkdownEditorPage extends Component {
   render() {
     return (
       <div>
-        <span>Markdown Editor</span>
+		<h2>Markdown to PDF</h2>
+		<p>Write Markdown with a live preview, reusable snippets, document metadata, and an optional watermark.</p>
 		<Button onClick={this.handleGetWorkflowJsonClick}>Get Workflow JSON</Button>
 		<Button onClick={this.handleGeneratePdfClick}>Generate PDF</Button>
 		<div style={{ margin: '10px 0' }}>
           <input type="text" name="author" placeholder="Author" value={this.state.author} onChange={this.handleMetaChange} style={{marginRight:'5px'}} />
           <input type="text" name="subject" placeholder="Subject" value={this.state.subject} onChange={this.handleMetaChange} style={{marginRight:'5px'}} />
           <input type="text" name="title" placeholder="Title" value={this.state.title} onChange={this.handleMetaChange} style={{marginRight:'5px'}} />
+		  <input type="text" name="watermark" placeholder="Watermark (optional)" value={this.state.watermark} onChange={this.handleMetaChange} />
         </div>
         <div style={{ margin: '10px 0' }}>
           <select value={this.state.snippet} onChange={e => this.handleSnippetChange({target: {value: e.target.value}})}>
