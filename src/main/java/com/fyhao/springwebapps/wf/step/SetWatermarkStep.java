@@ -9,6 +9,7 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.VerticalAlignment;
 
@@ -32,7 +33,7 @@ public class SetWatermarkStep extends WFStep {
 					canvas.add(image);
 				}
 				if (text != null && !text.trim().isEmpty()) {
-					canvas.setFontColor(DeviceGray.GRAY, alpha).showTextAligned(ctx.replaceVars(text),
+					canvas.setFontColor(DeviceGray.GRAY, alpha).showTextAligned(new Paragraph(ctx.replaceVars(text)),
 							size.getWidth() / 2, size.getHeight() / 2, pageNumber,
 							TextAlignment.CENTER, VerticalAlignment.MIDDLE, angle);
 				}
