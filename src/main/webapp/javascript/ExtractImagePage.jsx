@@ -70,6 +70,8 @@ class ExtractImagePage extends Component {
   render() {
     return (
       <div>
+		<h2>Extract images</h2>
+		<p>Upload a PDF or provide a PDF URL to download its embedded images as a ZIP archive.</p>
         <Form>
 			<FormGroup>
 				<Label>Upload File</Label>
