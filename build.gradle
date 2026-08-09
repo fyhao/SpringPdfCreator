@@ -65,16 +65,16 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
     implementation("org.springframework.boot:spring-boot-starter-activemq:3.5.7")
-    implementation 'com.itextpdf:itext7-core:9.3.0'
+    implementation 'com.itextpdf:itext7-core:9.7.1'
     implementation 'com.itextpdf:kernel:7.2.5'
-    implementation 'com.itextpdf:io:9.3.0'
-    implementation 'com.itextpdf:layout:9.3.0'
-    implementation 'com.itextpdf:forms:9.3.0'
+    implementation 'com.itextpdf:io:9.7.1'
+    implementation 'com.itextpdf:layout:9.7.1'
+    implementation 'com.itextpdf:forms:9.7.1'
     implementation 'com.itextpdf:pdfa:7.2.5'
-    implementation 'com.itextpdf:sign:9.3.0'
-    implementation 'com.itextpdf:barcodes:9.3.0'
+    implementation 'com.itextpdf:sign:9.7.1'
+    implementation 'com.itextpdf:barcodes:9.7.1'
     implementation 'com.itextpdf:font-asian:7.2.5'
-    implementation 'com.itextpdf:hyph:9.3.0'
+    implementation 'com.itextpdf:hyph:9.7.1'
     implementation group: 'com.itextpdf', name: 'html2pdf', version: '6.2.1'
 }
 configurations {
