@@ -3,7 +3,7 @@ package com.fyhao.springwebapps.business;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import javax.servlet.ServletOutputStream;
+import jakarta.servlet.ServletOutputStream;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
