@@ -5,8 +5,8 @@ import com.fyhao.springwebapps.wf.WFContext;
 import com.fyhao.springwebapps.wf.WFStep;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.AreaBreakType;
-import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.properties.AreaBreakType;
+import com.itextpdf.layout.properties.TextAlignment;
 
 public class TocStep extends WFStep {
     @Override

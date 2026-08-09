@@ -9,8 +9,8 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.layout.property.VerticalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.VerticalAlignment;
 
 public class SetWatermarkStep extends WFStep {
 	@Override
@@ -22,7 +22,7 @@ public class SetWatermarkStep extends WFStep {
 			PdfPage page = ctx.pdfDocument.getPage(pageNumber);
 			Rectangle size = page.getPageSize();
 			PdfCanvas pdfCanvas = new PdfCanvas(page.newContentStreamAfter(), page.getResources(), ctx.pdfDocument);
-			Canvas canvas = new Canvas(pdfCanvas, ctx.pdfDocument, size);
+			Canvas canvas = new Canvas(pdfCanvas, size);
 			try {
 				if (url != null && !url.trim().isEmpty()) {
 					Image image = new Image(ImageDataFactory.create(ctx.replaceVars(url))).setOpacity(alpha);
