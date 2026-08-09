@@ -7,7 +7,8 @@ class PasswordprotectPage extends Component {
   state = {
 	selectedFile:null,
 	url:'',
-	pwd:''
+	pwd:'',
+	operation:'add'
   }	
   constructor(props) {
     super(props);
@@ -28,7 +29,8 @@ class PasswordprotectPage extends Component {
 	var json = {
 		"type":"extractfromurl",
 		"url" :this.state.url,
-		"pwd": this.state.pwd
+		"pwd": this.state.pwd,
+		"operation": this.state.operation
 	};
 	fetch('/pdf/passwordprotectfrompdf', {
 		method:'POST',
@@ -52,6 +54,7 @@ class PasswordprotectPage extends Component {
 	  const formData = new FormData();
 	  formData.append('file', file);
 	  formData.append('pwd', this.state.pwd);
+	  formData.append('operation', this.state.operation);
 	  fetch('pdf/uploadpdfpasswordprotect', {
 	  	method: 'post',
 	  	body: formData
@@ -70,6 +73,7 @@ class PasswordprotectPage extends Component {
   handlePwdChange(e) {
 	this.setState({pwd:e.target.value});
   }
+	handleOperationChange = (e) => this.setState({operation:e.target.value});
   prevalidate(type) {
 	if(this.state.pwd == null || this.state.pwd.trim() == '') {
 		ee.emit('infomsg', {msg:'Password must not be blank',infocolor:'danger'});
@@ -86,7 +90,16 @@ class PasswordprotectPage extends Component {
   render() {
     return (
       <div>
+		<h2>Password protection</h2>
+		<p>Add encryption to a PDF or remove it using the document's current password. Files are processed and returned immediately.</p>
 		<Form>
+			<FormGroup>
+				<Label>Operation</Label>
+				<Input type="select" name="operation" value={this.state.operation} onChange={this.handleOperationChange}>
+					<option value="add">Add password</option>
+					<option value="remove">Remove password</option>
+				</Input>
+			</FormGroup>
 			<FormGroup>
 				<Label>Password</Label>
 				<Input type="text" name="pwd" id="url" onChange={this.handlePwdChange} value={this.state.pwd} />
