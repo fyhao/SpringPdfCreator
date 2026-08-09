@@ -1,108 +1,61 @@
 # SpringPdfCreator
 
-This project provides endpoints for PDF manipulation using Spring Boot and iText.
+Spring Boot and React application for generating and manipulating PDFs with iText.
 
-## Workflow Engine
+## Build and test
 
-The workflow engine supports customization of PDF generation through JSON-based workflows. It can generate PDFs from HTML text and add various customizations like signatures, watermarks, barcodes, and more.
+```bash
+./gradlew test
+npm ci
+npm test -- --runInBand
+npm run build
+```
 
-### Workflow Endpoints
+GitHub Actions runs the Java and React tests and creates the production React bundle on every push and pull request.
 
-#### POST Workflow
-`POST /pdf/workflowpdf`
+## Generate a PDF
 
-Accepts JSON workflow definition in the request body.
-
-#### GET Workflow from External JSON
-`GET /pdf/getpdf?url={workflow_json_url}`
-
-Loads and executes workflow from an external JSON file.
-
-### Available Workflow Steps
-
-- **generate**: Generate PDF from HTML text
-- **setVar**: Set variables for use in the workflow
-- **signature**: Add signature field to PDF
-- **barcode**: Add QR code barcode
-- **setWatermark**: Add watermark (stub)
-- **merge**: Merge multiple PDFs
-- **metadata**: Set PDF metadata (title, author, subject, etc.)
-- **passwordprotect**: Password protect the PDF
-- **httpget**: Download content via HTTP
-- **script**: Execute JavaScript code
-- **add**: Concatenate variables
-
-### Example Workflow with Signature
+`POST /pdf/workflowpdf` accepts a JSON workflow. Variables use `{{name}}` placeholders.
 
 ```json
 {
-  "initsteps": [
-    {
-      "action": "setVar",
-      "name": "html",
-      "value": "<html><body><h1>Contract Document</h1><p>This is a sample contract.</p></body></html>"
-    }
-  ],
+  "metadata": {"title": "Example", "author": "SpringPdfCreator"},
   "steps": [
-    {
-      "action": "generate"
-    },
-    {
-      "action": "barcode",
-      "text": "https://example.com/document/12345"
-    },
-    {
-      "action": "signature",
-      "name": "ClientSignature",
-      "value": "1"
-    }
-  ],
-  "metadata": {
-    "title": "Contract Document",
-    "author": "System",
-    "subject": "Legal Contract"
-  }
+    {"action": "setVar", "name": "customer", "value": "Yong Hao"},
+    {"action": "setVar", "name": "html", "value": "<h1>Hello {{customer}}</h1>"},
+    {"action": "generate"},
+    {"action": "toc", "entries": ["Introduction", "Details"]},
+    {"action": "setWatermark", "text": "CONFIDENTIAL", "opacity": 0.25, "rotation": 45},
+    {"action": "signature", "text": "Approved by Example"}
+  ]
 }
 ```
 
-### Signature Step
+Supported actions include `setVar`, `add`, `generate`, `metadata`, `barcode`, `passwordprotect`, `setWatermark`, `toc`, `signature`, `merge`, `httpget`, `httpWorkflow`, and `script`. `httpWorkflow` downloads a JSON workflow and runs its steps as a subflow.
 
-The `signature` step adds a signature field to the PDF that can be digitally signed later.
+## PDF utilities
 
-**Properties:**
-- `name`: Name of the signature field (default: "Signature")
-- `value`: Page number where signature should appear (default: 1)
-- `text`: Optional position and size in format "x,y,width,height" in points (default: "36,36,200,100")
+- `POST /pdf/mergepdf`: merge the PDF URLs in `{"urls": [...]}`.
+- `POST /pdf/extractimagefrompdf`: extract images from a PDF URL into ZIP.
+- `POST /pdf/uploadpdfextractimage`: extract images from an uploaded PDF.
+- `POST /pdf/passwordprotectfrompdf`: use `operation: "add"` to encrypt or `operation: "remove"` to decrypt a URL-hosted PDF.
+- `POST /pdf/uploadpdfpasswordprotect`: multipart upload with `file`, `pwd`, and `operation` (`add` or `remove`).
 
-**Example with default position:**
-```json
-{
-  "action": "signature",
-  "name": "AuthorSignature",
-  "value": "1"
-}
-```
+## Optional Firebase audit logging
 
-**Example with custom position:**
-```json
-{
-  "action": "signature",
-  "name": "ClientSignature",
-  "value": "1",
-  "text": "100,150,250,80"
-}
-```
+Successful PDF operations are delivered asynchronously to Firebase Realtime Database when configured. Keep these values in Heroku/host environment configuration, never in source control:
 
-## Merge PDF Endpoint
+- `FIREBASE_DATABASE_URL` — for example `https://project-id-default-rtdb.firebaseio.com`
+- `FIREBASE_DATABASE_AUTH` — optional database auth token
 
-`POST /pdf/mergepdf`
+When the URL is absent, auditing is disabled without affecting PDF generation.
 
-Accepts JSON body:
+## HTTP DB client protocol
 
-```json
-{
-  "urls": ["http://example.com/file1.pdf", "http://example.com/file2.pdf"]
-}
-```
+Set `HTTP_DB_URL` to a JSON endpoint. `HttpDbService` supports `insert`, `queryRowByField`, `queryList`, `update`, `delete`, `insertMany`, and `updateMany`. Requests contain `action`, `entity`, and action-specific `data`/criteria fields; responses return a `data` field.
 
-Returns the merged PDF created via `MergeStep` workflow.
+## Web pages
+
+- Markdown editor: live preview, local autosave, snippets, metadata, and watermark.
+- Password protection: upload or URL input with add/remove modes.
+- Image extraction: upload or URL input with ZIP output.

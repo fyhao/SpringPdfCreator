@@ -2,19 +2,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import com.fyhao.springwebapps.wf.WFContext;
-import com.fyhao.springwebapps.wf.step.SignatureStep;
+import com.fyhao.springwebapps.wf.step.TocStep;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 
-public class SignatureStepTests {
+public class TocStepTests {
 
     @Test
-    void addsTextSignatureToGeneratedDocument() {
+    void addsConfiguredEntries() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PdfDocument pdf = new PdfDocument(new PdfWriter(output));
         Document document = new Document(pdf);
@@ -22,9 +23,9 @@ public class SignatureStepTests {
         context.pdfDocument = pdf;
         context.document = document;
 
-        SignatureStep step = new SignatureStep();
-        step.text = "Signed by ${signer}";
-        context.vars.put("signer", "Test User");
+        TocStep step = new TocStep();
+        step.text = "Contents";
+        step.entries = List.of("Introduction", "Summary");
         step.execute(context);
         document.close();
 
@@ -33,7 +34,7 @@ public class SignatureStepTests {
 
     @Test
     void requiresGenerateStepFirst() {
-        SignatureStep step = new SignatureStep();
+        TocStep step = new TocStep();
         assertThrows(IllegalStateException.class, () -> step.execute(new WFContext()));
     }
 }
