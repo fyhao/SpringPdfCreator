@@ -73,7 +73,7 @@ public class WFContext {
 
 		for(Map.Entry<String,Object> entry: vars.entrySet()) {
 			while(p.contains("{{" + entry.getKey() + "}}")) {
-				p = p.replace("{{" + entry.getKey() + "}}", (String)entry.getValue());
+				p = p.replace("{{" + entry.getKey() + "}}", String.valueOf(entry.getValue()));
 			}
 		}
 		try {
@@ -126,8 +126,11 @@ public class WFContext {
 	
 
 	public void close() {
-
-        document.close();
+		if (document != null) {
+			document.close();
+		} else if (pdfDocument != null && !pdfDocument.isClosed()) {
+			pdfDocument.close();
+		}
 	}
 	
 }

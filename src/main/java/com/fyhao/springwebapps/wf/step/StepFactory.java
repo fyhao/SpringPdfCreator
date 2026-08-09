@@ -59,23 +59,27 @@ public class StepFactory {
 	}
 	
 	public static WFStep createStep(WFStep step) {
+		if (step == null || step.action == null) {
+			throw new IllegalArgumentException("Workflow step action is required");
+		}
 		Class<?> targetClass = stepClasses.get(step.action);
+		if (targetClass == null) {
+			throw new IllegalArgumentException("Unknown workflow step action: " + step.action);
+		}
 		Object obj = null;
 		try {
-			obj = targetClass.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			obj = targetClass.getDeclaredConstructor().newInstance();
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException("Unable to create workflow step: " + step.action, e);
 		}
-		if(obj == null) return null;
-		Field[] sourceFields = step.getClass().getDeclaredFields();
-		for(Field field : sourceFields) {
-			field.setAccessible(true);
+		for(Field sourceField : WFStep.class.getFields()) {
 			try {
-				field.set(obj, field.get(step));
+				Field targetField = targetClass.getField(sourceField.getName());
+				targetField.set(obj, sourceField.get(step));
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new IllegalStateException("Unable to copy workflow step field", e);
+			} catch (NoSuchFieldException ignored) {
+				// The target step does not use this optional protocol field.
 			}
 		}
 		return (WFStep)obj;

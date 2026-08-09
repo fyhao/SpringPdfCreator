@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fyhao.springwebapps.business.ExtractImageService;
+import com.fyhao.springwebapps.business.AuditLogService;
 import com.fyhao.springwebapps.business.PasswordprotectService;
 import com.fyhao.springwebapps.dto.ExtractImageRequest;
 import com.fyhao.springwebapps.dto.MergePdfRequest;
@@ -40,6 +41,9 @@ public class PdfController {
     
     @Autowired
     PasswordprotectService passwordprotectService;
+
+	@Autowired
+	AuditLogService auditLogService;
     
     @RequestMapping("/")
 	public @ResponseBody String home() {
@@ -60,12 +64,14 @@ public class PdfController {
         html = URLDecoder.decode(html, "UTF-8");
         response.setContentType("application/pdf");
         HtmlConverter.convertToPdf(html, response.getOutputStream());
+		auditLogService.recordPdfGenerated("html");
 	}
     
     @RequestMapping(value="/workflowpdf", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public void workflowpdf(@RequestBody WFRequest request, HttpServletResponse response) throws Exception {
     	response.setContentType("application/pdf");
-    	WorkflowExecutor.generatePdf(request, response);
+		WorkflowExecutor.generatePdf(request, response);
+		auditLogService.recordPdfGenerated("workflow");
 	}
     
     @RequestMapping(value="/getpdf", method = RequestMethod.GET)
@@ -96,13 +102,16 @@ public class PdfController {
     	response.setContentType("application/pdf");
     	String url = request.url;
     	String pwd = request.pwd;
-    	passwordprotectService.downloadPDF(url, pwd, response.getOutputStream());
+		passwordprotectService.downloadPDF(url, pwd, request.operation, response.getOutputStream());
+		auditLogService.recordPdfGenerated("password-" + request.operation);
 	}
     //uploadpdfextractimage
     @RequestMapping(value="/uploadpdfpasswordprotect", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-        public void uploadpdfpasswordprotect(@RequestParam MultipartFile file, @RequestParam String pwd, HttpServletResponse response) throws Exception {
+        public void uploadpdfpasswordprotect(@RequestParam MultipartFile file, @RequestParam String pwd,
+				@RequestParam(defaultValue="add") String operation, HttpServletResponse response) throws Exception {
         response.setContentType("application/pdf");
-        passwordprotectService.uploadpdfpasswordprotect(file, pwd, response.getOutputStream());
+        passwordprotectService.uploadPdf(file, pwd, operation, response.getOutputStream());
+		auditLogService.recordPdfGenerated("password-" + operation);
         }
 
     /**

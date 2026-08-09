@@ -14,6 +14,7 @@ import com.itextpdf.kernel.pdf.DocumentProperties;
 import com.itextpdf.kernel.pdf.EncryptionConstants;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.ReaderProperties;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.WriterProperties;
 
@@ -21,33 +22,48 @@ import com.itextpdf.kernel.pdf.WriterProperties;
 public class PasswordprotectService {
 
 	public void downloadPDF(String url, String pwd, ServletOutputStream os) {
+		downloadPDF(url, pwd, "add", os);
+	}
+
+	public void downloadPDF(String url, String pwd, String operation, ServletOutputStream os) {
 		RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> resp = restTemplate.getForEntity(url, byte[].class);
         ByteArrayInputStream bais = new ByteArrayInputStream(resp.getBody());
-        generatePDF(bais, os, pwd);
+		transformPDF(bais, os, pwd, operation);
 	}
 	
 	public void uploadpdfpasswordprotect(MultipartFile file, String pwd, ServletOutputStream os) throws IOException {
 		ByteArrayInputStream bais = new ByteArrayInputStream(file.getBytes());
 		generatePDF(bais, os, pwd);
 	}
+
+	public void uploadPdf(MultipartFile file, String pwd, String operation, ServletOutputStream os) throws IOException {
+		transformPDF(new ByteArrayInputStream(file.getBytes()), os, pwd, operation);
+	}
 	
 	public void generatePDF(ByteArrayInputStream resourceStream, 
 			ServletOutputStream os, String pwd) {
+		transformPDF(resourceStream, os, pwd, "add");
+	}
+
+	public void transformPDF(ByteArrayInputStream resourceStream, ServletOutputStream os, String pwd, String operation) {
 		try  (resourceStream)
         {
+			boolean remove = "remove".equalsIgnoreCase(operation);
 			WriterProperties properties = new WriterProperties();
-			byte[] USERPASS = pwd.getBytes();
-			byte[] OWNERPASS = pwd.getBytes();
-			properties.setStandardEncryption(USERPASS, OWNERPASS, EncryptionConstants.ALLOW_PRINTING,
-	                EncryptionConstants.ENCRYPTION_AES_128 | EncryptionConstants.DO_NOT_ENCRYPT_METADATA);
-			
-            PdfReader reader = new PdfReader(resourceStream);
+			PdfReader reader = remove
+					? new PdfReader(resourceStream, new ReaderProperties().setPassword(pwd.getBytes(java.nio.charset.StandardCharsets.UTF_8)))
+					: new PdfReader(resourceStream);
+			if (!remove) {
+				byte[] password = pwd.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+				properties.setStandardEncryption(password, password, EncryptionConstants.ALLOW_PRINTING,
+						EncryptionConstants.ENCRYPTION_AES_128 | EncryptionConstants.DO_NOT_ENCRYPT_METADATA);
+			}
             PdfWriter writer = new PdfWriter(os, properties);
             PdfDocument document = new PdfDocument(reader, writer);
             document.close();
         } catch( Exception ex) {
-        	
+			throw new IllegalArgumentException("Unable to " + operation + " PDF password protection", ex);
         }
 	}
 }
