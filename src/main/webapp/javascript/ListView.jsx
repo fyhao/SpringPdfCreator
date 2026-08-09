@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Table,Button } from 'reactstrap';
 import ee from './EventManager';
-class ListView extends Component {
+class ListView extends PureComponent {
   render() {
 	 const options = this.props.options;
 	 const fields = options.fields;
@@ -19,7 +19,7 @@ class ListView extends Component {
 			<tbody>
 		{data.map((row,i) => {
 	      var rowItems = [];
-		  fields.map((field,i) => {
+		  fields.forEach((field) => {
 			  var v = row[field.key];
 			  if(field.render) {
 				  v = field.render(v,row);
@@ -29,7 +29,7 @@ class ListView extends Component {
 				if(field.clickablestyle) {
 					clickablestyle = {...clickablestyle,...field.clickablestyle};
 				}
-				v = <span style={clickablestyle} onClick={this.onGridCellClick(row, field.key, v)}>{v}</span>
+				v = <button type="button" className="btn btn-link p-0" style={clickablestyle} onClick={this.onGridCellClick(row, field.key, v)}>{v}</button>
 			  }
 			  rowItems.push(v)
 		  })
@@ -64,7 +64,7 @@ class ListView extends Component {
   onGridCellClick(row, fieldkey, fieldvalue) {
 	  const options = this.props.options;
 	  return () => {
-	      options.handleGridCellClick(row, fieldkey, fieldvalue);
+	      if (options.handleGridCellClick) options.handleGridCellClick(row, fieldkey, fieldvalue);
 	  };
   }
 }
