@@ -15,6 +15,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.core.env.Environment;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
@@ -24,6 +25,7 @@ import org.springframework.jms.support.converter.MessageType;
 
 
 @SpringBootApplication
+@EnableAsync
 public class SpringWebMain {
 	static Logger logger = LoggerFactory.getLogger(SpringWebMain.class);
 	public static void main(String[] args) {
